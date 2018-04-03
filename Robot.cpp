@@ -3,6 +3,16 @@
 #include <unistd.h>     // for usleep
 #include <signal.h>     // for catching exit signals
 
+using namespace std;
+
+BrickPi3 BP;
+
+void exit_signal_handler(int signo);
+
+uint16_t MIN;
+uint16_t MAX;
+sensor_color_t mycolor;
+
 int main(){
   signal(SIGINT, exit_signal_handler); // register the exit function for Ctrl+C
 
