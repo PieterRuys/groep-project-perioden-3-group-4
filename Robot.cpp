@@ -52,7 +52,7 @@ int main(){
       BP.set_motor_power(PORT_C, (power+(lightval/3)));
     }
     if (lightval > 50){
-      BP.set_motor_power(PORT_B, (power+(lightval/3)));
+      BP.set_motor_power(PORT_B, (power+((100-lightval)/3)));
       BP.set_motor_power(PORT_C, (100-lightval)*power/50);
     }
     usleep(100000);
