@@ -8,10 +8,6 @@ using namespace std;
 
 BrickPi3 BP;
 
-uint16_t MIN;
-uint16_t MAX;
-sensor_color_t mycolor;
-
 BP.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
 
 sensor_ultrasonic_t Ultrasonic2;
@@ -45,32 +41,32 @@ void lft(void){
 string check_for_object(){
     if(Ultrasonic2.cm > 10){
        fwd(); 
-       return "IDLE"
+       return "IDLE";
     }
-    return "OBJECT"
+    return "OBJECT";
 }
 
 string move_asside(){
-    rgt()
     fwd();
-    lft()
+    lft();
     return "check_again";
 }
 
 string move_around(){
     fwd();
-    rgt()
-    return "check_distance"
+    rgt();
+    return "check_distance";
 }
 
 int main()
 {
+string state = "IDLE";
     while(true){
-        string state = "IDLE";
         if(state == "IDLE"){
             state = check_for_object();
         }
         else if(state == "OBJECT"){
+	    rgt();
             state = move_asside();
         }
         else if(state == "check_again"){
@@ -87,11 +83,12 @@ int main()
         else if(state == "check_distance"){
             if(Ultrasonic2.cm > 10){
                 fwd(); 
-                rgt()
+                rgt();
                 state = "IDLE";
             }
             else{
                 state = "AROUND_OBJECT";
             }
+    }
     }
 }
