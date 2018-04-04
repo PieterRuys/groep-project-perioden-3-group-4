@@ -31,6 +31,15 @@ void fwd(void)
 
 }
 
+void rgt(void){
+    BP.set_motor_position_relative(PORT_B, 270);
+    BP.set_motor_position_relative(PORT_C, -270);
+}
+
+void lft(void){
+    BP.set_motor_position_relative(PORT_B, -270);
+    BP.set_motor_position_relative(PORT_C, 270);
+}
 
 
 string check_for_object(){
@@ -42,18 +51,15 @@ string check_for_object(){
 }
 
 string move_asside(){
-    BP.set_motor_position_relative(PORT_B, 270);
-    BP.set_motor_position_relative(PORT_C, -270);
+    rgt()
     fwd();
-    BP.set_motor_position_relative(PORT_B, -270);
-    BP.set_motor_position_relative(PORT_C, 270);
+    lft()
     return "check_again";
 }
 
 string move_around(){
     fwd();
-    BP.set_motor_position_relative(PORT_B, -270);
-    BP.set_motor_position_relative(PORT_C, 270);
+    rgt()
     return "check_distance"
 }
 
@@ -81,8 +87,7 @@ int main()
         else if(state == "check_distance"){
             if(Ultrasonic2.cm > 10){
                 fwd(); 
-                BP.set_motor_position_relative(PORT_B, -270);
-                BP.set_motor_position_relative(PORT_C, 270);
+                rgt()
                 state = "IDLE";
             }
             else{
