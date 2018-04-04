@@ -49,11 +49,11 @@ int main(){
       BP.set_motor_position_relative(PORT_B, 300);
       BP.set_motor_position_relative(PORT_C, -300);
     }
-    if (lightval <= 50){
+    else if (lightval <= 50){
       BP.set_motor_power(PORT_B, lightval*power/50);
       BP.set_motor_power(PORT_C, power +10);
     }
-    if (lightval > 50){
+    else if (lightval > 50){
       BP.set_motor_power(PORT_B, power +10);
       BP.set_motor_power(PORT_C, (100-lightval)*power/50);
     }
