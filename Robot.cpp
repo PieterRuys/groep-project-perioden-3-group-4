@@ -46,8 +46,8 @@ int main(){
   while(true){
     lightval = measureLight();
     if (lightval > 90){
-      BP.set_motor_position_relative(PORT_B, 300);
-      BP.set_motor_position_relative(PORT_C, -300);
+      BP.set_motor_position_relative(PORT_B, 10);
+      BP.set_motor_position_relative(PORT_C, -10);
     }
     else if (lightval <= 50){
       BP.set_motor_power(PORT_B, lightval*power/50);
