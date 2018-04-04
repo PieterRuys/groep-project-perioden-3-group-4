@@ -44,15 +44,15 @@ int main(){
   cin >> regel;
 
   int16_t lightval;
-  int16_t power = 25;
+  int16_t power = 20;
   while(true){
     lightval = measureLight();
     if (lightval <= 50){
       BP.set_motor_power(PORT_B, lightval*power/50);
-      BP.set_motor_power(PORT_C, (power+(lightval/3)));
+      BP.set_motor_power(PORT_C, (power+10));
     }
     if (lightval > 50){
-      BP.set_motor_power(PORT_B, (power+((100-lightval)/3)));
+      BP.set_motor_power(PORT_B, (power+10));
       BP.set_motor_power(PORT_C, (100-lightval)*power/50);
     }
     usleep(100000);
