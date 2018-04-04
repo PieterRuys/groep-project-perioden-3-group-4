@@ -42,7 +42,7 @@ int main(){
   cin >> regel;
 
   int16_t lightval;
-  int16_t power = 20;
+  int16_t power = 30;
   while(true){
     lightval = measureLight();
     if (lightval <= 50){
