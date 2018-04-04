@@ -12,6 +12,12 @@ BP.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
 
 sensor_ultrasonic_t Ultrasonic2;
 
+void stop(void)
+{
+	 BP.set_motor_power(PORT_B, 0);
+	 BP.set_motor_power(PORT_C, 0);
+}
+
 void fwd(void)
 {
 	 BP.set_motor_power(PORT_B, 20);
