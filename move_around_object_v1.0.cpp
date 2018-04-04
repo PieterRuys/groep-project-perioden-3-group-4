@@ -6,13 +6,6 @@
 
 using namespace std;
 
-BrickPi3 BP;
-
-
-BP.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
-
-sensor_ultrasonic_t Ultrasonic2;
-
 void stop(void)
 {
 	 BP.set_motor_power(PORT_B, 0);
@@ -67,6 +60,13 @@ string move_around(){
 
 int main()
 {
+
+BrickPi3 BP;
+
+
+BP.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
+
+sensor_ultrasonic_t Ultrasonic2;
 
 string state = "IDLE";
     while(true){
