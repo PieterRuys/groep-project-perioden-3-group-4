@@ -42,7 +42,7 @@ int main(){
   cin >> regel;
 
   int16_t lightval;
-  int16_t power = 40;
+  int16_t power = 20;
   while(true){
     lightval = measureLight();
     if (lightval > 95){
@@ -50,12 +50,12 @@ int main(){
       BP.set_motor_position_relative(PORT_C, -50);
     }
     else if (lightval <= 50){
-      BP.set_motor_power(PORT_B, lightval*power/50);
-      BP.set_motor_power(PORT_C, (power -30));
+      BP.set_motor_power(PORT_B, lightval*power/30);
+      BP.set_motor_power(PORT_C, power);
     }
     else if (lightval > 50){
-      BP.set_motor_power(PORT_B, (power-30));
-      BP.set_motor_power(PORT_C, (100-lightval)*power/50);
+      BP.set_motor_power(PORT_B, power);
+      BP.set_motor_power(PORT_C, (100-lightval)*power/30);
     }
     usleep(100000);
   }
