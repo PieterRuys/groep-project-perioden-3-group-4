@@ -49,10 +49,10 @@ int main(){
     lightval = measureLight();
     if (lightval <= 50){
       BP.set_motor_power(PORT_B, lightval*power/50);
-      BP.set_motor_power(PORT_C, (power+((50-lightval)/20)));
+      BP.set_motor_power(PORT_C, (power+((50-lightval)/50)));
     }
     if (lightval > 50){
-      BP.set_motor_power(PORT_B, (power+((lightval - 50)/20)));
+      BP.set_motor_power(PORT_B, (power+((lightval - 50)/50)));
       BP.set_motor_power(PORT_C, (100-lightval)*power/50);
     }
     usleep(100000);
