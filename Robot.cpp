@@ -42,12 +42,12 @@ int main(){
   cin >> regel;
 
   int16_t lightval;
-  int16_t power = 30;
+  int16_t power = 40;
   while(true){
     lightval = measureLight();
-    if (lightval > 90){
-      BP.set_motor_position_relative(PORT_B, 10);
-      BP.set_motor_position_relative(PORT_C, -10);
+    if (lightval > 95){
+      BP.set_motor_position_relative(PORT_B, 50);
+      BP.set_motor_position_relative(PORT_C, -50);
     }
     else if (lightval <= 50){
       BP.set_motor_power(PORT_B, lightval*power/50);
