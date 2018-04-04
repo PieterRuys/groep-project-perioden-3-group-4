@@ -20,16 +20,6 @@ void stop(void)
 
 void fwd(void)
 {
-	 BP.set_motor_power(PORT_B, 20);
-	 BP.set_motor_power(PORT_C, 20);
-	 usleep(500000);
-	 BP.set_motor_power(PORT_B, 40);
-	 BP.set_motor_power(PORT_C, 40);
-	 usleep(500000);
-	 BP.set_motor_power(PORT_B, 50);
-	 BP.set_motor_power(PORT_C, 50);
-	 sleep(2);
-	 stop();
 
 }
 
