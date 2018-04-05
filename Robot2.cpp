@@ -21,7 +21,7 @@ int16_t getlight(){
   int16_t val = mylight.reflected;
   if (val < LightMin) val = LightMin;
   if (val > LightMax) val = LightMax;
-  return (100*(val - LightMax))/(LightMin - LightMax);
+  return (100*(val - LightMin))/(LightMax - LightMin);
 }
 
 int16_t getcolor(){
@@ -71,7 +71,7 @@ int main(){
       BP.set_motor_power(PORT_B, -10);
       BP.set_motor_power(PORT_C, 40);
     }
-    if (colorval < 80){
+    if (colorval > 20){
       BP.set_motor_power(PORT_B, 40);
       BP.set_motor_power(PORT_C, -10);
     }
