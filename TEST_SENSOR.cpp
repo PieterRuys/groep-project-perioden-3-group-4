@@ -25,7 +25,7 @@ int main(){
         if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
 		cout << "Ultrasonic sensor (S2): "   << Ultrasonic2.cm << "cm" << endl;
  	}
-    sleep(5);
+    sleep(1);
   }
 
 }
