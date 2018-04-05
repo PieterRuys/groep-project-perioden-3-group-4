@@ -41,7 +41,7 @@ int main(){
         if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
 		if(Ultrasonic2.cm < 30){
 			cout << "minder" << endl;
-			dodge()
+			dodge();
 		}
  	}
     sleep(1);
