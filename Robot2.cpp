@@ -11,18 +11,25 @@ void exit_signal_handler(int signo);
 
 uint16_t MIN;
 uint16_t MAX;
+uint16_t MIN2;
+uint16_t MAX2;
 sensor_light_t mylight;
+sensor_color_t mycolor;
 
 int16_t getlight(){
   BP.get_sensor(PORT_3, mylight);
   int16_t val = mylight.reflected;
-  if(val<MIN){
-    MIN = val;
-  }
-  if(val>MAX){
-    MAX = val;
-  }
+  if(val<MIN) val = MIN;
+  if(val>MAX) val = MAX;
   return (100*(val - MAX))/(MIN - MAX);
+}
+
+int16_t measureLight(){
+  BP.get_sensor(PORT_1, mycolor);
+  uint16_t val = mycolor.reflected_red;
+  if (val < MIN2) val = MIN2;
+	if (val > MAX2) val = MAX2;
+  return (100*(val - MIN2))/(MAX2 - MIN2);
 }
 
 int main(){
@@ -31,31 +38,37 @@ int main(){
   BP.detect(); // Make sure that the BrickPi3 is communicating and that the firmware is compatible with the drivers.
 
   BP.set_sensor_type(PORT_3, SENSOR_TYPE_NXT_LIGHT_ON);
+  BP.set_sensor_type(PORT_1, SENSOR_TYPE_NXT_COLOR_RED);
   
   string regel;
   cout << "plaats sensor recht boven de lijn (zwart) en voer in a gevolgd door enter" << endl;
   cin >> regel;
   BP.get_sensor(PORT_3, mylight);
+  BP.get_sensor(PORT_1, mycolor);
   MIN = mylight.reflected;
+  MIN2 = mycolor.reflected_red;
   cout << "MIN = " << MIN << endl;
   cout << "plaats sensor helemaal naast de lijn (wit) en voer in b gevolgd door enter" << endl;
   cin >> regel;
   BP.get_sensor(PORT_3, mylight);
+  BP.get_sensor(PORT_1, mycolor);
   MAX = mylight.reflected;
+  MAX = mycolor.reflected_red;
   cout << "MAX = " << MAX << endl;
   cout << "plaats het voertuig met de sensor half boven de lijn en voer in c gevolgd door enter" << endl;
   cin >> regel;
   
   int16_t lightval;
+  int16_t lightval2;
   int16_t power = 20;
   
   while(true){
     lightval = getlight();
-    if (lightval <= 50){
+    if (lightval <= 50 && lightval2 > 60){
       BP.set_motor_power(PORT_B, -10);
       BP.set_motor_power(PORT_C, (100-lightval));
     }
-    if (lightval > 60){
+    if (lightval > 60 && lightval2 <= 40){
       BP.set_motor_power(PORT_B, (lightval-40));
       BP.set_motor_power(PORT_C, -10);
     }
