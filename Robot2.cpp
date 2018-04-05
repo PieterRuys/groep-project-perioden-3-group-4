@@ -21,7 +21,7 @@ int16_t getlight(){
   int16_t val = mylight.reflected;
   if (val < LightMin) val = LightMin;
   if (val > LightMax) val = LightMax;
-  return (100*(val - LightMin))/(LightMax - LightMin);
+  return (100*(val - LightMax))/(LightMin - LightMax);
 }
 
 int16_t getcolor(){
