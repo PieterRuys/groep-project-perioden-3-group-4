@@ -39,7 +39,7 @@ void lft(void){
 }
 
 
-string check_for_object(){
+string check_for_object(sensor_ultrasonic_t Ultrasonic2){
     if(Ultrasonic2.cm > 10){
        fwd(); 
        return "IDLE";
@@ -69,7 +69,7 @@ sensor_ultrasonic_t Ultrasonic2;
 string state = "IDLE";
     while(true){
         if(state == "IDLE"){
-            state = check_for_object();
+            state = check_for_object(Ultrasonic2);
         }
         else if(state == "OBJECT"){
 	    rgt();
