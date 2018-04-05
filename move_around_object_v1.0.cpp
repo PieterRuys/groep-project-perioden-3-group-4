@@ -8,6 +8,8 @@ using namespace std;
 
 BrickPi3 BP;
 
+void exit_signal_handler(int signo);
+
 void stop(void)
 {
 	 BP.set_motor_power(PORT_B, 0);
@@ -61,6 +63,7 @@ string move_around(){
 
 int main()
 {
+signal(SIGINT, exit_signal_handler);
 
 BP.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
 
@@ -97,4 +100,12 @@ string state = "IDLE";
             }
     }
     }
+}
+
+void exit_signal_handler(int signo){
+  if(signo == SIGINT){
+    BP.reset_all();    // Reset everything so there are no run-away motors
+    BP.set_sensor_type(PORT_1, SENSOR_TYPE_NONE);  //Doesn't work, sorry.
+    exit(-2);
+  }
 }
