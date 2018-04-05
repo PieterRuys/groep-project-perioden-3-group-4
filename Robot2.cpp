@@ -42,7 +42,7 @@ int main(){
   Light = mylight.reflected;
   Color = mycolor.reflected_red;
   cout << "Light =" << Light << endl;
-  cout << "Color =" << Color << end1;
+  cout << "Color =" << Color << endl;
   
   int16_t lightval;
   int16_t lightval2;
