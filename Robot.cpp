@@ -47,6 +47,7 @@ int main(){
   int16_t power = 20;
   while(true){
     lightval = getlight();
+    cout << lightval << endl;
     if (lightval <= 40){
       BP.set_motor_power(PORT_B, (lightval*power/50)-(lightval*power/70));
       BP.set_motor_power(PORT_C, (power+10)+(lightval/50));
