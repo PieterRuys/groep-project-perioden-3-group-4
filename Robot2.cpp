@@ -58,12 +58,12 @@ int main(){
       //BP.set_motor_power(PORT_C, 40);
     //}
     if ((Color - colorval) > 20){
-      BP.set_motor_power(PORT_B, 40);
-      BP.set_motor_power(PORT_C, -10);
+      BP.set_motor_power(PORT_B, -10);
+      BP.set_motor_power(PORT_C, 40);
     }
-    if ((Color - colorval) < 10){
-      BP.set_motor_power(PORT_B, 40);
-      BP.set_motor_power(PORT_C, -10);
+    if ((Color - colorval) < -20){
+      BP.set_motor_power(PORT_B, -10);
+      BP.set_motor_power(PORT_C, 40);
     }
     else{
       BP.set_motor_power(PORT_B, 30);
