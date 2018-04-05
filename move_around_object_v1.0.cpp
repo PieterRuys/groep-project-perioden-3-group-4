@@ -35,11 +35,13 @@ void lft(void){
 
 
 string check_for_object(sensor_ultrasonic_t Ultrasonic2){
+    if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
     if(Ultrasonic2.cm < 20){
        fwd(); 
        return "IDLE";
     }
     return "OBJECT";
+    }
 }
 
 string move_asside(){
