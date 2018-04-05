@@ -19,6 +19,7 @@ BP.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
 sensor_ultrasonic_t Ultrasonic2;
 
 while(true){
+  cout << "hoi";
   cout << Ultrasonic2.cm;
   sleep(5);
 }
