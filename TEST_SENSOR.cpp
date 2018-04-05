@@ -29,6 +29,7 @@ void move_aside(void){
 
 void dodge(sensor_ultrasonic_t Ultrasonic2){
 	int done = 0;
+	move_aside();
 	
 }
 
