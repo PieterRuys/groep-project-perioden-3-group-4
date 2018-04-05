@@ -9,27 +9,21 @@ BrickPi3 BP;
 
 void exit_signal_handler(int signo);
 
-uint16_t MIN;
-uint16_t MAX;
-uint16_t MIN2;
-uint16_t MAX2;
+uint16_t Light;
+uint16_t Color;
 sensor_light_t mylight;
 sensor_color_t mycolor;
 
 int16_t getlight(){
   BP.get_sensor(PORT_3, mylight);
   int16_t val = mylight.reflected;
-  if(val<MIN) val = MIN;
-  if(val>MAX) val = MAX;
-  return (100*(val - MAX))/(MIN - MAX);
+  return (Light-val);
 }
 
 int16_t measureLight(){
   BP.get_sensor(PORT_1, mycolor);
   uint16_t val = mycolor.reflected_red;
-  if (val < MIN2) val = MIN2;
-	if (val > MAX2) val = MAX2;
-  return (100*(val - MIN2))/(MAX2 - MIN2);
+  return (Color-val);
 }
 
 int main(){
@@ -45,18 +39,10 @@ int main(){
   cin >> regel;
   BP.get_sensor(PORT_3, mylight);
   BP.get_sensor(PORT_1, mycolor);
-  MIN = mylight.reflected;
-  MIN2 = mycolor.reflected_red;
-  cout << "MIN = " << MIN << endl;
-  cout << "plaats sensor helemaal naast de lijn (wit) en voer in b gevolgd door enter" << endl;
-  cin >> regel;
-  BP.get_sensor(PORT_3, mylight);
-  BP.get_sensor(PORT_1, mycolor);
-  MAX = mylight.reflected;
-  MAX2 = mycolor.reflected_red;
-  cout << "MAX = " << MAX << endl;
-  cout << "plaats het voertuig met de sensor half boven de lijn en voer in c gevolgd door enter" << endl;
-  cin >> regel;
+  Light = mylight.reflected;
+  Color = mycolor.reflected_red;
+  cout << "Light =" << Light << endl;
+  cout << "Color =" << Color << end1;
   
   int16_t lightval;
   int16_t lightval2;
@@ -64,12 +50,11 @@ int main(){
   
   while(true){
     lightval = getlight();
-    lightval2 = measureLight();
-    if (lightval <= 50 && lightval2 > 60){
+    if (lightval <= 50 && lightval > 60){
       BP.set_motor_power(PORT_B, -10);
       BP.set_motor_power(PORT_C, (100-lightval));
     }
-    if (lightval > 60 && lightval2 <= 40){
+    if (lightval > 60 && lightval <= 40){
       BP.set_motor_power(PORT_B, (lightval-40));
       BP.set_motor_power(PORT_C, -10);
     }
