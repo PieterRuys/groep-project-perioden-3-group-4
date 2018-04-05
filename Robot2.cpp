@@ -79,7 +79,7 @@ int main(){
       //BP.set_motor_power(PORT_B, 30);
       //BP.set_motor_power(PORT_C, 30);
     //}
-    usleep(1000000);
+    usleep(100000);
  }   
   
 }
