@@ -62,17 +62,17 @@ int main(){
     lightval = getlight();
     colorval = getcolor();
     if (lightval <= 50 && colorval >= 50){
+      BP.set_motor_power(PORT_B, 40);
+      BP.set_motor_power(PORT_C, 10);
+    }
+    if (lightval >= 50 && colorval <= 50){
       BP.set_motor_power(PORT_B, -10);
       BP.set_motor_power(PORT_C, 40);
     }
-    if (lightval >= 50 && colorval <= 50){
-      BP.set_motor_power(PORT_B, 40);
-      BP.set_motor_power(PORT_C, -10);
-    }
-    else{
-      BP.set_motor_power(PORT_B, 30);
-      BP.set_motor_power(PORT_C, 30);
-    }
+    //else{
+      //BP.set_motor_power(PORT_B, 30);
+      //BP.set_motor_power(PORT_C, 30);
+    //}
     usleep(100000);
  }   
   
