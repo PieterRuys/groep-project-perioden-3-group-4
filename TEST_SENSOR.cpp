@@ -29,29 +29,7 @@ void move_aside(void){
 
 void dodge(sensor_ultrasonic_t Ultrasonic2){
 	int done = 0;
-	move_aside();
-	while(done == 0){
-		BP.set_motor_power(PORT_B, 50);
-		BP.set_motor_power(PORT_C, 50);
-		sleep(1);
-		BP.set_motor_power(PORT_B, 0);
-		BP.set_motor_power(PORT_C, 0);
-		BP.set_motor_position_relative(PORT_B, -550);
-		BP.set_motor_position_relative(PORT_C, 550);
-		if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
-			if(Ultrasonic2.cm < 30){
-				BP.set_motor_position_relative(PORT_B, 550);
-				BP.set_motor_position_relative(PORT_C, -550);
-			}
- 		}
-		BP.set_motor_power(PORT_B, 50);
-		BP.set_motor_power(PORT_C, 50);
-		sleep(1);
-		BP.set_motor_power(PORT_B, 0);
-		BP.set_motor_power(PORT_C, 0);
-		BP.set_motor_position_relative(PORT_B, 550);
-		BP.set_motor_position_relative(PORT_C, -550);
-	}
+	
 }
 
 int main(){
