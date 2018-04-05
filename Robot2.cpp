@@ -10,22 +10,22 @@ BrickPi3 BP;
 void exit_signal_handler(int signo);
 
 uint16_t LightMin;
-uint16_t LightMax
+uint16_t LightMax;
 uint16_t ColorMin;
-uint16_t ColorMax
+uint16_t ColorMax;
 sensor_light_t mylight;
 sensor_color_t mycolor;
 
 int16_t getlight(){
   BP.get_sensor(PORT_3, mylight);
   int16_t val = mylight.reflected;
-  return (Light-val);
+  return (val);
 }
 
 int16_t measureLight(){
   BP.get_sensor(PORT_1, mycolor);
   uint16_t val = mycolor.reflected_red;
-  return (Color-val);
+  return (val);
 }
 
 int main(){
