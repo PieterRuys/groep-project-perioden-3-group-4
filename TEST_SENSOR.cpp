@@ -19,7 +19,7 @@ void move_aside(void){
 	sleep(1);
 	BP.set_motor_power(PORT_B, 50);
 	BP.set_motor_power(PORT_C, 50);
-	sleep(1.5);
+	sleep(3);
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	sleep(1);
