@@ -48,17 +48,13 @@ int main(){
   while(true){
     lightval = getlight();
     cout << lightval << endl;
-    if (lightval <= 40){
+    if (lightval <= 50){
       BP.set_motor_power(PORT_B, (lightval*power/50)-(lightval*power/70));
       BP.set_motor_power(PORT_C, (power+10)+(lightval/50));
     }
-    if (lightval >= 60){
+    if (lightval >= 50){
       BP.set_motor_power(PORT_B, (power+10)+((100-lightval)/50));
       BP.set_motor_power(PORT_C, ((100-lightval)*power/50)-(lightval*power/70));
-    }
-    if(lightval > 40 && lightval < 60){
-      BP.set_motor_power(PORT_B, 30);
-      BP.set_motor_power(PORT_C, 30);
     }
     usleep(100000);
  } 
