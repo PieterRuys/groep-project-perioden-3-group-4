@@ -41,17 +41,17 @@ int main(){
   cin >> regel;
   
   int16_t lightval;
-  //int16_t power = 20;
+  int16_t power = 20;
   
   while(true){
     lightval = getlight();
     if (lightval <= 40){
-      BP.set_motor_power(PORT_B, lightval * 20);
-      BP.set_motor_power(PORT_C, 0);
+      BP.set_motor_power(PORT_B, lightval*power/50);
+      BP.set_motor_power(PORT_C, power-(lightval*power/50);
     }
     if (lightval > 60){
-      BP.set_motor_power(PORT_B, 0);
-      BP.set_motor_power(PORT_C, lightval * 20);
+      BP.set_motor_power(PORT_B, power-(lightval*power/50));
+      BP.set_motor_power(PORT_C, (100-lightval)*power/50);
     }
     else{
       BP.set_motor_power(PORT_B, 30);
