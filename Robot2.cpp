@@ -17,13 +17,13 @@ sensor_color_t mycolor;
 int16_t getlight(){
   BP.get_sensor(PORT_3, mylight);
   int16_t val = mylight.reflected;
-  return val
+  return val;
 }
 
 int16_t getcolor(){
   BP.get_sensor(PORT_1, mycolor);
   uint16_t val = mycolor.reflected_red;
-  return val
+  return val;
 }
 
 int main(){
@@ -53,11 +53,11 @@ int main(){
     colorval = getcolor();
     cout << lightval << endl;
     cout << colorval << endl;
-    if ((lightval - light) > 50){
+    if ((lightval - Light) > 50){
       BP.set_motor_power(PORT_B, -10);
       BP.set_motor_power(PORT_C, 40);
     }
-    if ((color - colorval) > 100{
+    if ((Color - colorval) > 100){
       BP.set_motor_power(PORT_B, 40);
       BP.set_motor_power(PORT_C, -10);
     }
