@@ -49,8 +49,8 @@ int main(){
     lightval = getlight();
     cout << lightval << endl;
     if (lightval <= 40){
-      BP.set_motor_power(PORT_B, (power+10)+(lightval/50));
-      BP.set_motor_power(PORT_C, (lightval*power/50)-(lightval*power/70));
+      BP.set_motor_power(PORT_B, -10);
+      BP.set_motor_power(PORT_C, 40);
     }
     if (lightval > 60){
       BP.set_motor_power(PORT_B, (power+10)+((100-lightval)/50));
