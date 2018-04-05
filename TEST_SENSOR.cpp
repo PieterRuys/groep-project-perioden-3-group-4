@@ -26,7 +26,7 @@ void move_aside(void){
 	BP.set_motor_position_relative(PORT_C, 550);
 }
 
-void dodge(void){
+void dodge(sensor_ultrasonic_t Ultrasonic2){
 	int done = 0;
 	move_aside();
 	while(done == 0){
@@ -70,7 +70,7 @@ int main(){
         if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
 		if(Ultrasonic2.cm < 30){
 			cout << "minder" << endl;
-			dodge();
+			dodge(Ultrasonic2);
 		}
  	}
     sleep(1);
