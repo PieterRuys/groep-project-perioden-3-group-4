@@ -22,9 +22,8 @@ int main(){
   cout << "test";
   
   while(true){
-	  int ultra = Ultrasonic2;
         if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
-		if(ultra < 30){
+		if(Ultrasonic2.cm < 30){
 			cout << "minder";
 		}
  	}
