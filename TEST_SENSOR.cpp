@@ -72,7 +72,7 @@ int main(){
 	BP.set_motor_power(PORT_B, 30);
 	BP.set_motor_power(PORT_C, 30);
         if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
-		if(Ultrasonic2.cm < 30){
+		if(Ultrasonic2.cm < 20){
 			cout << "minder" << endl;
 			dodge(Ultrasonic2);
 		}
