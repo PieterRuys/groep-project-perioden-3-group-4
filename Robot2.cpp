@@ -46,12 +46,12 @@ int main(){
   while(true){
     lightval = getlight();
     if (lightval <= 40){
-      BP.set_motor_power(PORT_B, lightval*power/50);
+      BP.set_motor_power(PORT_B, (lightval*power/50)-(lightval*power/60));
       BP.set_motor_power(PORT_C, power+10);
     }
     if (lightval > 60){
       BP.set_motor_power(PORT_B, power+10);
-      BP.set_motor_power(PORT_C, (100-lightval)*power/50);
+      BP.set_motor_power(PORT_C, ((100-lightval)*power/50)-(lightval*power/60));
     }
     else{
       BP.set_motor_power(PORT_B, 30);
