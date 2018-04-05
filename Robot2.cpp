@@ -64,6 +64,7 @@ int main(){
   
   while(true){
     lightval = getlight();
+    lightval2 = measureLight();
     if (lightval <= 50 && lightval2 > 60){
       BP.set_motor_power(PORT_B, -10);
       BP.set_motor_power(PORT_C, (100-lightval));
