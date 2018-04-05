@@ -22,7 +22,7 @@ int16_t getlight(){
   if(val>MAX){
     MAX = val;
   }
-  return (100*(val - MIN))/(MAX - MIN);
+  return (100*(val - MAX))/(MIN - MAX);
 }
 
 int main(){
