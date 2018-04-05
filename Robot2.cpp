@@ -14,7 +14,7 @@ uint16_t MAX;
 sensor_light_t mylight;
 
 int16_t getlight(){
-  BP.get_sensor(PORT_3, mylight)
+  BP.get_sensor(PORT_3, mylight);
   int16_t val = mylight.reflected;
   return (100*(val - MIN))/(MAX - MIN);
 }
