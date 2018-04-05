@@ -56,10 +56,10 @@ int main(){
       BP.set_motor_power(PORT_B, (power+10)+((100-lightval)/50));
       BP.set_motor_power(PORT_C, ((100-lightval)*power/50)-((100-lightval)*power/70));
     }
-    else{
-      BP.set_motor_power(PORT_B, 30);
-      BP.set_motor_power(PORT_C, 30);
-    }
+    //else{
+      //BP.set_motor_power(PORT_B, 30);
+      //BP.set_motor_power(PORT_C, 30);
+    //}
     usleep(100000);
  } 
  }                        
