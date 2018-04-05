@@ -13,7 +13,6 @@ void exit_signal_handler(int signo);
 void move_aside(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	sleep(1);
 	BP.set_motor_position_relative(PORT_B, 550);
 	BP.set_motor_position_relative(PORT_C, -550);
 	sleep(1);
