@@ -18,14 +18,10 @@ int main(){
   BP.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
 
   sensor_ultrasonic_t Ultrasonic2;
- 
-  BP.set_motor_power(PORT_B, 20);
-	BP.set_motor_power(PORT_C, -20);
 
   cout << "test";
   
   while(true){
-    cout << "hoi";
         if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
 		cout << "Ultrasonic sensor (S2): "   << Ultrasonic2.cm << "cm" << endl;
  	}
