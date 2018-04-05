@@ -53,7 +53,7 @@ int main(){
   BP.get_sensor(PORT_3, mylight);
   BP.get_sensor(PORT_1, mycolor);
   MAX = mylight.reflected;
-  MAX = mycolor.reflected_red;
+  MAX2 = mycolor.reflected_red;
   cout << "MAX = " << MAX << endl;
   cout << "plaats het voertuig met de sensor half boven de lijn en voer in c gevolgd door enter" << endl;
   cin >> regel;
