@@ -23,7 +23,9 @@ int main(){
   
   while(true){
         if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
-		cout << "Ultrasonic sensor (S2): "   << Ultrasonic2.cm << "cm" << endl;
+		if(Ultrasonic2 < 30){
+			cout << "minder";
+		}
  	}
     sleep(1);
   }
