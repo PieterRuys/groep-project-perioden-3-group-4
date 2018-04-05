@@ -9,8 +9,10 @@ BrickPi3 BP;
 
 void exit_signal_handler(int signo);
 
-uint16_t Light;
-uint16_t Color;
+uint16_t LightMin;
+uint16_t LightMax
+uint16_t ColorMin;
+uint16_t ColorMax
 sensor_light_t mylight;
 sensor_color_t mycolor;
 
@@ -39,10 +41,18 @@ int main(){
   cin >> regel;
   BP.get_sensor(PORT_3, mylight);
   BP.get_sensor(PORT_1, mycolor);
-  Light = mylight.reflected;
-  Color = mycolor.reflected_red;
-  cout << "Light =" << Light << endl;
-  cout << "Color =" << Color << endl;
+  LightMax = mylight.reflected;
+  ColorMin = mycolor.reflected_red;
+  cout << "LightMax =" << LightMax << endl;
+  cout << "ColorMin =" << ColorMin << endl;
+  cout << "plaats sensor recht boven de lijn (wit) en voer in a gevolgd door enter" << endl;
+  cin >> regel;
+  BP.get_sensor(PORT_3, mylight);
+  BP.get_sensor(PORT_1, mycolor);
+  LightMin = mylight.reflected;
+  ColorMax = mycolor.reflected_red;
+  cout << "LightMin =" << LightMin << endl;
+  cout << "ColorMax =" << ColorMax << endl;
   
   int16_t lightval;
   int16_t lightval2;
