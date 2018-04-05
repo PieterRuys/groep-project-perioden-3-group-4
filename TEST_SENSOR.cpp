@@ -26,11 +26,15 @@ void turn_right(void){
 	sleep(1);	
 }
 
-void move_aside(void){
-	turn_right();
+void forward(int time){
 	BP.set_motor_power(PORT_B, 50);
 	BP.set_motor_power(PORT_C, 50);
-	sleep(1.5);
+	sleep(time);
+}
+
+void move_aside(void){
+	turn_right();
+	forward(2);
 	turn_left();
 }
 
@@ -38,18 +42,14 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
 	int done = 0;
 	move_aside();
 	while(done == 0){
-		BP.set_motor_power(PORT_B, 50);
-		BP.set_motor_power(PORT_C, 50);
-		sleep(3);
+		forward(3);
 		turn_left();
 		if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
 			if(Ultrasonic2.cm < 30){
 				turn_right();
 			}
 			else{
-				BP.set_motor_power(PORT_B, 50);
-				BP.set_motor_power(PORT_C, 50);
-				sleep(1);
+				forward(2);
 				turn_right();
 				done ++;
 			}
