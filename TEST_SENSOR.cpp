@@ -10,21 +10,25 @@ BrickPi3 BP;
 
 void exit_signal_handler(int signo);
 
-int main()
-{
-signal(SIGINT, exit_signal_handler);
+int main(){
+  signal(SIGINT, exit_signal_handler);
+ 
+  BP.detect();
 
-BP.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
+  BP.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
 
-sensor_ultrasonic_t Ultrasonic2;
+  sensor_ultrasonic_t Ultrasonic2;
+ 
+  BP.set_motor_power(PORT_B, 0);
+	 BP.set_motor_power(PORT_C, 0);
 
- cout << "test";
+  cout << "test";
   
-while(true){
-  cout << "hoi";
-  cout << Ultrasonic2.cm;
-  sleep(5);
-}
+  while(true){
+    cout << "hoi";
+    cout << Ultrasonic2.cm;
+    sleep(5);
+  }
 
 }
 
