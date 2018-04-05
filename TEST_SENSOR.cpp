@@ -26,8 +26,8 @@ int main(){
 		if(Ultrasonic2.cm < 30){
 			cout << "minder" << endl;
 			
-	 		BP.set_motor_position_relative(PORT_B, 340);
-	 		BP.set_motor_position_relative(PORT_C, -340);
+	 		BP.set_motor_position_relative(PORT_B, 600);
+	 		BP.set_motor_position_relative(PORT_C, -600);
 		}
  	}
     sleep(1);
