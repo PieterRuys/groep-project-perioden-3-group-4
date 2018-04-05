@@ -27,6 +27,8 @@ int16_t getlight(){
 int16_t getcolor(){
   BP.get_sensor(PORT_1, mycolor);
   uint16_t val = mycolor.reflected_red;
+  if (val < ColorMin) val = ColorMin;
+  if (val > ColorMax) val = ColorMax;
   return (100*(val - ColorMin))/(ColorMax - ColorMin);
 }
 
