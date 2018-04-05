@@ -25,6 +25,9 @@ int main(){
         if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
 		if(Ultrasonic2.cm < 30){
 			cout << "minder" << endl;
+			
+	 		BP.set_motor_position_relative(PORT_B, 270);
+	 		BP.set_motor_position_relative(PORT_C, -270);
 		}
  	}
     sleep(1);
