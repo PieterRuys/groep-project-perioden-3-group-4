@@ -61,7 +61,7 @@ int main(){
       BP.set_motor_power(PORT_B, 40);
       BP.set_motor_power(PORT_C, -10);
     }
-    if ((Color - colorval) < -20){
+    if ((Color - colorval) < 10){
       BP.set_motor_power(PORT_B, 40);
       BP.set_motor_power(PORT_C, -10);
     }
