@@ -31,12 +31,12 @@ int main(){
   cin >> regel;
   BP.get_sensor(PORT_3, mylight);
   MAX = mylight.reflected;
-  cout << "MIN = " << MIN << endl;
+  cout << "MAX = " << MIN << endl;
   cout << "plaats sensor helemaal naast de lijn (wit) en voer in b gevolgd door enter" << endl;
   cin >> regel;
   BP.get_sensor(PORT_3, mylight);
   MIN = mylight.reflected;
-  cout << "MAX = " << MAX << endl;
+  cout << "MIN = " << MAX << endl;
   cout << "plaats het voertuig met de sensor half boven de lijn en voer in c gevolgd door enter" << endl;
   cin >> regel;
   
