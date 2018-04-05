@@ -51,7 +51,7 @@ int main(){
   
   while(true){
     lightval = getlight();
-    if (lightval <= 40){
+    if (lightval <= 50){
       BP.set_motor_power(PORT_B, -10);
       BP.set_motor_power(PORT_C, (100-lightval));
     }
