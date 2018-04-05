@@ -72,7 +72,7 @@ string state = "IDLE";
             state = move_asside();
         }
         else if(state == "check_again"){
-            if(Ultrasonic2.cm > 10){
+            if(Ultrasonic2.cm < 10){
                 state = "OBJECT";
             }
             else{
@@ -83,7 +83,7 @@ string state = "IDLE";
             state = move_around();
         }
         else if(state == "check_distance"){
-            if(Ultrasonic2.cm > 10){
+            if(Ultrasonic2.cm < 10){
                 fwd(); 
                 rgt();
                 state = "IDLE";
