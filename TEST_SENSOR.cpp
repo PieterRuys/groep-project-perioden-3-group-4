@@ -13,10 +13,10 @@ void exit_signal_handler(int signo);
 void dodge(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	sleep(0.5);
+	sleep(1);
 	BP.set_motor_position_relative(PORT_B, 550);
 	BP.set_motor_position_relative(PORT_C, -550);
-	sleep(0.5);
+	sleep(1);
 	BP.set_motor_power(PORT_B, 50);
 	BP.set_motor_power(PORT_C, 50);
 	sleep(1);
