@@ -22,7 +22,7 @@ int16_t getlight(){
   return (100*(val - LightMin))/(LightMax - LightMin);
 }
 
-int16_t measureLight(){
+int16_t getcolor(){
   BP.get_sensor(PORT_1, mycolor);
   uint16_t val = mycolor.reflected_red;
   return (100*(val - LightMin))/(LightMax - LightMin);
@@ -55,17 +55,18 @@ int main(){
   cout << "ColorMax =" << ColorMax << endl;
   
   int16_t lightval;
-  int16_t lightval2;
+  int16_t colorval;
   int16_t power = 20;
   
   while(true){
     lightval = getlight();
-    if (lightval <= 50 && lightval > 60){
+    colorval = getcolor();
+    if (lightval <= 50 && colorval > 60){
       BP.set_motor_power(PORT_B, -10);
-      BP.set_motor_power(PORT_C, (100-lightval));
+      BP.set_motor_power(PORT_C, 40);
     }
-    if (lightval > 60 && lightval <= 40){
-      BP.set_motor_power(PORT_B, (lightval-40));
+    if (lightval > 60 && colorval <= 40){
+      BP.set_motor_power(PORT_B, 40);
       BP.set_motor_power(PORT_C, -10);
     }
     else{
