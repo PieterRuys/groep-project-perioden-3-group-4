@@ -77,7 +77,6 @@ int main(){
 			dodge(Ultrasonic2);
 		}
  	}
-    sleep(1);
   }
 
 }
