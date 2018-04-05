@@ -62,7 +62,7 @@ string move_around(){
 int main()
 {
 
-BrickPi3.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
+BP.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
 
 sensor_ultrasonic_t Ultrasonic2;
 
