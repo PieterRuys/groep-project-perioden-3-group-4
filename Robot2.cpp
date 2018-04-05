@@ -68,12 +68,12 @@ int main(){
     cout << lightval << endl;
     cout << colorval << endl;
     if (lightval > 80){
-      //BP.set_motor_power(PORT_B, -10);
-      //BP.set_motor_power(PORT_C, 40);
+      BP.set_motor_power(PORT_B, -10);
+      BP.set_motor_power(PORT_C, 40);
     }
     if (colorval < 20){
-      //BP.set_motor_power(PORT_B, 40);
-      //BP.set_motor_power(PORT_C, -10);
+      BP.set_motor_power(PORT_B, 40);
+      BP.set_motor_power(PORT_C, -10);
     }
     //else{
       //BP.set_motor_power(PORT_B, 30);
