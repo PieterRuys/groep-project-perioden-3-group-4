@@ -57,7 +57,7 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
 		BP.set_motor_position_relative(PORT_B, 550);
 		BP.set_motor_position_relative(PORT_C, -550);
 		sleep(1);
-		
+		done ++;
 	}
 }
 
