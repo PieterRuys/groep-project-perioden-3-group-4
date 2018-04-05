@@ -13,7 +13,7 @@ uint16_t MIN;
 uint16_t MAX;
 sensor_color_t mycolor;
 
-int16_t measureLight(){
+int16_t getlight(){
   BP.get_sensor(PORT_1, mycolor);
   uint16_t val = mycolor.reflected_red;
   if (val < MIN) val = MIN;
