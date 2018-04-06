@@ -49,6 +49,7 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
 				turn_right();
 			}
 			else{
+				//hier forward tot de sensoren een lijn zien dan turn_right(); en  dan verder gaan met het nromale protocol
 				forward(2);
 				turn_right();
 				done ++;
