@@ -19,7 +19,7 @@ sensor_light_t mylight;
 
 int16_t getRGB(){
   BP.get_sensor(PORT_1, mycolor);
-  uint16_t val = mycolor.reflected_red;
+  uint16_t val = mycolor.reflected_blue;
   if (val < MIN_RGB) val = MIN_RGB;
   if (val > MAX_RGB) val = MAX_RGB;
   return (100*(val - MIN_RGB))/(MAX_RGB - MIN_RGB);
@@ -38,7 +38,7 @@ int main(){
 
   BP.detect(); // Make sure that the BrickPi3 is communicating and that the firmware is compatible with the drivers.
 
-  BP.set_sensor_type(PORT_1, SENSOR_TYPE_NXT_COLOR_RED);
+  BP.set_sensor_type(PORT_1, SENSOR_TYPE_NXT_COLOR_BLUE);
   BP.set_sensor_type(PORT_3, SENSOR_TYPE_NXT_LIGHT_ON);
 
   //calibrate
@@ -48,14 +48,14 @@ int main(){
   BP.get_sensor(PORT_1, mycolor);
   BP.get_sensor(PORT_3, mylight);
   MIN_LIGHT = mylight.reflected;
-  MIN_RGB = mycolor.reflected_red;
+  MIN_RGB = mycolor.reflected_blue;
   cout << "MIN_RGB = " << MIN_RGB << endl;
   cout << "MIN_LIGHT = " << MIN_LIGHT << endl;
   cout << "plaats sensor helemaal naast de lijn (wit) en voer in b gevolgd door enter" << endl;
   cin >> regel;
   BP.get_sensor(PORT_1, mycolor);
   BP.get_sensor(PORT_3, mylight);
-  MAX_RGB = mycolor.reflected_red;
+  MAX_RGB = mycolor.reflected_blue;
   MAX_LIGHT = mylight.reflected;
   cout << "MAX_RGB = " << MAX_RGB << endl;
   cout << "MAX_LIGHT = " << MAX_LIGHT << endl;
