@@ -53,11 +53,11 @@ int main(){
     colorval = getcolor();
     cout << lightval << endl;
     cout << colorval << endl;
-    if ((Light - lightval) > 80){
+    if ((lightval - Light) > 60){
       BP.set_motor_power(PORT_B, 40);
       BP.set_motor_power(PORT_C, -10);
     }
-    if ((colorval - Color) > 60){
+    if ((Color - colorval) > 80){
       BP.set_motor_power(PORT_B, -10);
       BP.set_motor_power(PORT_C, 40);
     }
