@@ -60,7 +60,7 @@ int main(){
   
   int16_t lightval;
   int16_t colorval;
-  int16_t power = 20;
+  int16_t power = 40;
   
   while(true){
     lightval = getlight();
@@ -76,8 +76,8 @@ int main(){
       BP.set_motor_power(PORT_C, (100- lightval));
     }
     if(lightval < 30 && colorval > 50){
-      BP.set_motor_power(PORT_B, 15);
-      BP.set_motor_power(PORT_C, 15);
+      BP.set_motor_power(PORT_B, 20);
+      BP.set_motor_power(PORT_C, 20);
     }
     usleep(100000);
  }   
