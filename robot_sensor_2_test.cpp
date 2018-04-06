@@ -63,9 +63,13 @@ int main(){
   cin >> regel;
 
   int16_t RGBval;
+  int16_t lightval
   int16_t power = 20;
-//  while(true){
-//    RGBval = getRGB();
+  while(true){
+    RGBval = getRGB();
+    lightval = getlight();
+    cout << lightval << RGBval << endl;
+    
 //    cout << lightval << endl;
 //    if (RGBval <= 50){
 //      BP.set_motor_power(PORT_B, (RGBval*power/50)-(RGBval*power/70));
@@ -76,7 +80,7 @@ int main(){
 //      BP.set_motor_power(PORT_C, ((100-RGBval)*power/50)-(RGBval*power/70));
 //   }
 //    usleep(100000);
-// } 
+ } 
  }                        
  
  void exit_signal_handler(int signo){
