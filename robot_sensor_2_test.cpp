@@ -63,7 +63,7 @@ int main(){
   cin >> regel;
 
   int16_t RGBval;
-  int16_t lightval
+  int16_t lightval;
   int16_t power = 20;
   while(true){
     RGBval = getRGB();
