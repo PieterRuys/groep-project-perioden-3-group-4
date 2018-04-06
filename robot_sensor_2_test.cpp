@@ -30,8 +30,8 @@ int16_t getlight(){
   uint16_t val = mylight.reflected;
   if (val > MIN_LIGHT) val = MIN_LIGHT;
   if (val < MAX_LIGHT) val = MAX_LIGHT;
-  return (100*(val - MAX_LIGHT))/(MIN_LIGHT - MAX_LIGHT);
   cout << MIN_LIGHT << MAX_LIGHT << endl;
+  return (100*(val - MAX_LIGHT))/(MIN_LIGHT - MAX_LIGHT);
 }
 
 int main(){
