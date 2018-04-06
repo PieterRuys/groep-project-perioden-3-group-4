@@ -9,16 +9,28 @@ BrickPi3 BP;
 
 void exit_signal_handler(int signo);
 
-uint16_t MIN;
-uint16_t MAX;
-sensor_color_t mycolor;
 
-int16_t getlight(){
+uint16_t MIN_LIGHT;
+uint16_t MAX_LIGHT;
+uint16_t MIN_RGB;
+uint16_t MAX_RGB;
+sensor_color_t mycolor;
+sensor_light_t mylight;
+
+int16_t getRGB(){
   BP.get_sensor(PORT_1, mycolor);
   uint16_t val = mycolor.reflected_red;
-  if (val < MIN) val = MIN;
-  if (val > MAX) val = MAX;
-  return (100*(val - MIN))/(MAX - MIN);
+  if (val < MIN_RGB) val = MIN_RGB;
+  if (val > MAX_RGB) val = MAX_RGB;
+  return (100*(val - MIN_RGB))/(MAX_RGB - MIN_RGB);
+}
+
+int16_t getlight(){
+  BP.get_sensor(PORT_1, mylight);
+  uint16_t val = mylight.reflected;
+  if (val < MIN_LIGHT) val = MIN_LIGHT;
+  if (val > MAX_LIGHT) val = MAX_LIGHT;
+  return (100*(val - MIN_LIGHT))/(MAX_LIGHT - MIN_LIGHT);
 }
 
 int main(){
@@ -35,31 +47,36 @@ int main(){
   cin >> regel;
   BP.get_sensor(PORT_1, mycolor);
   BP.get_sensor(PORT_3, mylight);
-  MIN_ = mycolor.reflected_red;
-  cout << "MIN = " << MIN << endl;
+  MIN_LIGHT = mylight.reflected;
+  MIN_RGB = mycolor.reflected_red;
+  cout << "MIN_RGB = " << MIN_RGB << endl;
+  cout << "MIN_LIGHT = " << MIN_LIGHT << endl;
   cout << "plaats sensor helemaal naast de lijn (wit) en voer in b gevolgd door enter" << endl;
   cin >> regel;
   BP.get_sensor(PORT_1, mycolor);
-  MAX = mycolor.reflected_red;
-  cout << "MAX = " << MAX << endl;
+  BP.get_sensor(PORT_3, mylight);
+  MAX_RGB = mycolor.reflected_red;
+  MIN_LIGHT = mylight.reflected;
+  cout << "MAX_RGB = " << MAX_RGB << endl;
+  cout << "MAX_LIGHT = " << MAX_LIGHT << endl;
   cout << "plaats het voertuig met de sensor half boven de lijn en voer in c gevolgd door enter" << endl;
   cin >> regel;
 
-  int16_t lightval;
+  int16_t RGBval;
   int16_t power = 20;
-  while(true){
-    lightval = getlight();
-    cout << lightval << endl;
-    if (lightval <= 50){
-      BP.set_motor_power(PORT_B, (lightval*power/50)-(lightval*power/70));
-      BP.set_motor_power(PORT_C, (power+10)+(lightval/50));
-    }
-    if (lightval >= 50){
-      BP.set_motor_power(PORT_B, (power+10)+((100-lightval)/50));
-      BP.set_motor_power(PORT_C, ((100-lightval)*power/50)-(lightval*power/70));
-    }
-    usleep(100000);
- } 
+//  while(true){
+//    RGBval = getRGB();
+//    cout << lightval << endl;
+//    if (RGBval <= 50){
+//      BP.set_motor_power(PORT_B, (RGBval*power/50)-(RGBval*power/70));
+//      BP.set_motor_power(PORT_C, (power+10)+(lightval/50));
+//    }
+//    if (lightval >= 50){
+//      BP.set_motor_power(PORT_B, (power+10)+((100-RGBval)/50));
+//      BP.set_motor_power(PORT_C, ((100-RGBval)*power/50)-(RGBval*power/70));
+//   }
+//    usleep(100000);
+// } 
  }                        
  
  void exit_signal_handler(int signo){
