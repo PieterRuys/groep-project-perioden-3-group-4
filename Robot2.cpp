@@ -57,19 +57,19 @@ int main(){
       //BP.set_motor_power(PORT_B, -10);
       //BP.set_motor_power(PORT_C, 40);
     //}
-    if ((Color - colorval) > 20){
-      BP.set_motor_power(PORT_B, -10);
-      BP.set_motor_power(PORT_C, 40);
-    }
-    if ((Color - colorval) < -20){
-      BP.set_motor_power(PORT_B, -10);
-      BP.set_motor_power(PORT_C, 40);
-    }
-    else{
-      BP.set_motor_power(PORT_B, 30);
-      BP.set_motor_power(PORT_C, 30);
-    }
-    usleep(100000);
+    //if ((Color - colorval) > 20){
+      //BP.set_motor_power(PORT_B, -10);
+      //BP.set_motor_power(PORT_C, 40);
+    //}
+    //if ((Color - colorval) < -20){
+      //BP.set_motor_power(PORT_B, -10);
+      //BP.set_motor_power(PORT_C, 40);
+    //}
+    //else{
+      //BP.set_motor_power(PORT_B, 30);
+      //BP.set_motor_power(PORT_C, 30);
+    //}
+    usleep(1000000);
  }   
   
 }
