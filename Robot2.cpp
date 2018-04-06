@@ -60,7 +60,7 @@ int main(){
   
   int16_t lightval;
   int16_t colorval;
-  int16_t power = 20;
+  int16_t power = 10;
   
   while(true){
     lightval = getlight();
@@ -73,7 +73,7 @@ int main(){
     }
     if (colorval < 50){
       BP.set_motor_power(PORT_B, power);
-      BP.set_motor_power(PORT_C, (150- lightval)/1.5);
+      BP.set_motor_power(PORT_C, (100- lightval)/1.5);
     }
     if(lightval < 50 && colorval > 50){
       BP.set_motor_power(PORT_B, 15);
