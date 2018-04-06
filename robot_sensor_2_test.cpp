@@ -47,18 +47,18 @@ int main(){
   cin >> regel;
   BP.get_sensor(PORT_1, mycolor);
   BP.get_sensor(PORT_3, mylight);
-  MIN_LIGHT = mylight.reflected;
+  MAX_LIGHT = mylight.reflected;
   MIN_RGB = mycolor.reflected_blue;
   cout << "MIN_RGB = " << MIN_RGB << endl;
-  cout << "MIN_LIGHT = " << MIN_LIGHT << endl;
+  cout << "MIN_LIGHT = " << MAX_LIGHT << endl;
   cout << "plaats sensor helemaal naast de lijn (wit) en voer in b gevolgd door enter" << endl;
   cin >> regel;
   BP.get_sensor(PORT_1, mycolor);
   BP.get_sensor(PORT_3, mylight);
   MAX_RGB = mycolor.reflected_blue;
-  MAX_LIGHT = mylight.reflected;
+  MIN_LIGHT = mylight.reflected;
   cout << "MAX_RGB = " << MAX_RGB << endl;
-  cout << "MAX_LIGHT = " << MAX_LIGHT << endl;
+  cout << "MIN_LIGHT = " << MIN_LIGHT << endl;
   cout << "plaats het voertuig met de sensor half boven de lijn en voer in c gevolgd door enter" << endl;
   cin >> regel;
 
