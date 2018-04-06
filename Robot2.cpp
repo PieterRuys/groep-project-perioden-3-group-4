@@ -53,14 +53,14 @@ int main(){
     colorval = getcolor();
     cout << lightval << endl;
     cout << colorval << endl;
-    //if ((lightval - Light) > 10){
-      //BP.set_motor_power(PORT_B, -10);
-      //BP.set_motor_power(PORT_C, 40);
-    //}
-    //if ((Color - colorval) > 20){
-      //BP.set_motor_power(PORT_B, -10);
-      //BP.set_motor_power(PORT_C, 40);
-    //}
+    if ((Light - lightval) > 80){
+      BP.set_motor_power(PORT_B, 40);
+      BP.set_motor_power(PORT_C, -10);
+    }
+    if ((colorval - Color) > 60){
+      BP.set_motor_power(PORT_B, -10);
+      BP.set_motor_power(PORT_C, 40);
+    }
     //if ((Color - colorval) < -20){
       //BP.set_motor_power(PORT_B, -10);
       //BP.set_motor_power(PORT_C, 40);
@@ -69,7 +69,7 @@ int main(){
       //BP.set_motor_power(PORT_B, 30);
       //BP.set_motor_power(PORT_C, 30);
     //}
-    usleep(1000000);
+    usleep(100000);
  }   
   
 }
