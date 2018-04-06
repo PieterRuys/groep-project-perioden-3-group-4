@@ -31,6 +31,7 @@ int16_t getlight(){
   if (val > MIN_LIGHT) val = MIN_LIGHT;
   if (val < MAX_LIGHT) val = MAX_LIGHT;
   return (100*(val - MAX_LIGHT))/(MIN_LIGHT - MAX_LIGHT);
+  cout << MIN_LIGHT << MAX_LIGHT << endl;
 }
 
 int main(){
@@ -69,7 +70,7 @@ int main(){
     RGBval = getRGB();
     lightval = getlight();
     cout << lightval << RGBval << endl;
-    
+    sleep(0.2)
 //    cout << lightval << endl;
 //    if (RGBval <= 50){
 //      BP.set_motor_power(PORT_B, (RGBval*power/50)-(RGBval*power/70));
