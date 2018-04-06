@@ -65,7 +65,7 @@ int main(){
   while(true){
     lightval = getlight();
     colorval = getcolor();
-    cout << lightval << endl;
+    //cout << lightval << endl;
     cout << colorval << endl;
     if (lightval > 50){
       BP.set_motor_power(PORT_B, (lightval-50)/1.5);
