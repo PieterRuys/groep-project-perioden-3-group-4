@@ -45,18 +45,18 @@ int main(){
   cin >> regel;
   BP.get_sensor(PORT_3, mylight);
   BP.get_sensor(PORT_1, mycolor);
-  LightMax = mylight.reflected;
-  ColorMin = mycolor.reflected_red;
-  cout << "LightMax =" << LightMax << endl;
-  cout << "ColorMin =" << ColorMin << endl;
+  MaxLight = mylight.reflected;
+  MinColor = mycolor.reflected_red;
+  cout << "MaxLight =" << MaxLight << endl;
+  cout << "MinColor =" << MinColor << endl;
   cout << "plaats sensor recht boven de lijn (wit) en voer in a gevolgd door enter" << endl;
   cin >> regel;
   BP.get_sensor(PORT_3, mylight);
   BP.get_sensor(PORT_1, mycolor);
-  LightMin = mylight.reflected;
-  ColorMax = mycolor.reflected_red;
-  cout << "LightMin =" << LightMin << endl;
-  cout << "ColorMax =" << ColorMax << endl;
+  MinLight = mylight.reflected;
+  MaxColor = mycolor.reflected_red;
+  cout << "MinLight =" << MinLight << endl;
+  cout << "MaxColor =" << MaxColor << endl;
   
   int16_t lightval;
   int16_t colorval;
