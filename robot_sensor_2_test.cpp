@@ -70,7 +70,7 @@ int main(){
     RGBval = getRGB();
     lightval = getlight();
     cout << lightval << RGBval << endl;
-    sleep(0.2);
+    sleep(1);
 //    cout << lightval << endl;
 //    if (RGBval <= 50){
 //      BP.set_motor_power(PORT_B, (RGBval*power/50)-(RGBval*power/70));
