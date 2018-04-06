@@ -26,11 +26,10 @@ int16_t getRGB(){
 }
 
 int16_t getlight(){
-  BP.get_sensor(PORT_1, mylight);
+  BP.get_sensor(PORT_3, mylight);
   uint16_t val = mylight.reflected;
   if (val > MIN_LIGHT) val = MIN_LIGHT;
   if (val < MAX_LIGHT) val = MAX_LIGHT;
-  cout << MIN_LIGHT << MAX_LIGHT << endl;
   return (100*(val - MAX_LIGHT))/(MIN_LIGHT - MAX_LIGHT);
 }
 
