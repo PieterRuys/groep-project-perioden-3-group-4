@@ -51,8 +51,8 @@ int main(){
   while(true){
     lightval = getlight();
     colorval = getcolor();
-    //cout << lightval << endl;
-    //cout << colorval << endl;
+    cout << lightval << endl;
+    cout << colorval << endl;
     if ((Light - lightval) > 80){
       BP.set_motor_power(PORT_B, 40);
       BP.set_motor_power(PORT_C, -10);
@@ -69,7 +69,7 @@ int main(){
       //BP.set_motor_power(PORT_B, 30);
       //BP.set_motor_power(PORT_C, 30);
     //}
-    usleep(100000);
+    usleep(1000000);
  }   
   
 }
