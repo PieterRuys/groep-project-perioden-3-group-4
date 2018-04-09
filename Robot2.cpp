@@ -40,7 +40,7 @@ void forward(int time){
 
 void move_aside(void){
 	turn_right();
-	forward(2);
+	forward(1.5);
 	turn_left();
 }
 
@@ -56,9 +56,12 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
 			}
 			else{
 				//hier forward tot de sensoren een lijn zien dan turn_right(); en  dan verder gaan met het nromale protocol
-				forward(2);
-				turn_right();
-				done ++;
+				BP.set_motor_power(PORT_B, 50);
+				BP.set_motor_power(PORT_C, 50);
+				if(getcolor() > 40){
+					turn_right();
+					done ++;
+				}
 			}
  		}
 	}
