@@ -66,7 +66,7 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
 	while(done == 0){
     BP.set_motor_power(PORT_B, 50);
 	  BP.set_motor_power(PORT_C, 50);
-    for(usigned int i = 0; i < 50; i++){
+    for(unsignd int i = 0; i < 50; i++){
       if(getlight() > 90){
         done++;
         break;
@@ -74,7 +74,7 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
     }
 		turn_left();
 		if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
-			else if(Ultrasonic2.cm < 30){
+			if(Ultrasonic2.cm < 30){
 				turn_right();
 			}
 			else{
