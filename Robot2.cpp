@@ -116,7 +116,7 @@ int main(){
     cout << lightval << endl;
     cout << colorval << endl;
     if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
-		    if(Ultrasonic2.cm < 20){
+		    if(Ultrasonic2.cm < 10){
 			    dodge(Ultrasonic2);
 		    }
  	    }
