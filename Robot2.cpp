@@ -56,7 +56,7 @@ void forward(int time){
 
 void move_aside(void){
 	turn_right();
-	forward(2);
+	forward(1);
 	turn_left();
 }
 
