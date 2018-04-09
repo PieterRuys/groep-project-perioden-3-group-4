@@ -149,6 +149,7 @@ int main(){
 	BP.set_motor_position_relative(PORT_B, -250);
 	BP.set_motor_position_relative(PORT_C, 250);
 	sleep(1);
+    }
     usleep(100000);
  }   
   
