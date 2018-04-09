@@ -35,16 +35,16 @@ int16_t getcolor(){
 void turn_left(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	BP.set_motor_position_relative(PORT_B, -500);
-	BP.set_motor_position_relative(PORT_C, 500);
+	BP.set_motor_position_relative(PORT_B, -600);
+	BP.set_motor_position_relative(PORT_C, 600);
 	sleep(1);
 }
 
 void turn_right(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	BP.set_motor_position_relative(PORT_B, 500);
-	BP.set_motor_position_relative(PORT_C, -500);
+	BP.set_motor_position_relative(PORT_B, 600);
+	BP.set_motor_position_relative(PORT_C, -600);
 	sleep(1);	
 }
 
