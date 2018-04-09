@@ -74,9 +74,9 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
 				//hier forward tot de sensoren een lijn zien dan turn_right(); en  dan verder gaan met het nromale protocol
 				BP.set_motor_power(PORT_B, 20);
 				BP.set_motor_power(PORT_C, 20);
-				if(getcolor() > 40){
+				if(getcolor() < 40){
 					cout << "check" << endl;
-					forward(0.2);
+					forward(0.5);
 					turn_right();
 					done ++;
 				}
