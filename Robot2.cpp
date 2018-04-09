@@ -16,6 +16,54 @@ uint16_t MaxColor;
 sensor_light_t mylight;
 sensor_color_t mycolor;
 
+void turn_left(void){
+	BP.set_motor_power(PORT_B, 0);
+	BP.set_motor_power(PORT_C, 0);
+	BP.set_motor_position_relative(PORT_B, -600);
+	BP.set_motor_position_relative(PORT_C, 600);
+	sleep(1);
+}
+
+void turn_right(void){
+	BP.set_motor_power(PORT_B, 0);
+	BP.set_motor_power(PORT_C, 0);
+	BP.set_motor_position_relative(PORT_B, 600);
+	BP.set_motor_position_relative(PORT_C, -600);
+	sleep(1);	
+}
+
+void forward(int time){
+	BP.set_motor_power(PORT_B, 50);
+	BP.set_motor_power(PORT_C, 50);
+	sleep(time);
+}
+
+void move_aside(void){
+	turn_right();
+	forward(2);
+	turn_left();
+}
+
+void dodge(sensor_ultrasonic_t Ultrasonic2){
+	int done = 0;
+	move_aside();
+	while(done == 0){
+		forward(2);
+		turn_left();
+		if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
+			if(Ultrasonic2.cm < 30){
+				turn_right();
+			}
+			else{
+				//hier forward tot de sensoren een lijn zien dan turn_right(); en  dan verder gaan met het nromale protocol
+				forward(2);
+				turn_right();
+				done ++;
+			}
+ 		}
+	}
+}
+
 int16_t getlight(){
   BP.get_sensor(PORT_3, mylight);
   int16_t val = mylight.reflected;
@@ -38,7 +86,10 @@ int main(){
   BP.detect(); // Make sure that the BrickPi3 is communicating and that the firmware is compatible with the drivers.
 
   BP.set_sensor_type(PORT_3, SENSOR_TYPE_NXT_LIGHT_ON);
+  BP.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
   BP.set_sensor_type(PORT_1, SENSOR_TYPE_NXT_COLOR_RED);
+  
+  sensor_ultrasonic_t Ultrasonic2;
   
   string regel;
   cout << "plaats sensor recht boven de lijn (zwart) en voer in a gevolgd door enter" << endl;
@@ -67,6 +118,11 @@ int main(){
     colorval = getcolor();
     cout << lightval << endl;
     cout << colorval << endl;
+    if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
+		    if(Ultrasonic2.cm < 20){
+			    dodge(Ultrasonic2);
+		    }
+ 	    }
     if (lightval > 30){
       BP.set_motor_power(PORT_B, power+((lightval-30)/1.5));
       BP.set_motor_power(PORT_C, power-((lightval-30)/1.5));
