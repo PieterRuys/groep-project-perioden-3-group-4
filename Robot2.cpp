@@ -71,8 +71,7 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
 				turn_right();
 			}
 			else{
-				done++
-				}
+				done++;
 			}
  		}
 	}
