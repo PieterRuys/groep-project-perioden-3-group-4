@@ -77,7 +77,7 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
 					BP.set_motor_power(PORT_C, 50);
 					if(getcolor() < 40){
 						cout << "check" << endl;
-						sleep(1);
+						sleep(0.5);
 						turn_right();
 						break;
 					}
