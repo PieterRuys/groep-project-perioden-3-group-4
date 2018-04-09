@@ -66,7 +66,7 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
 	while(done == 0){
     BP.set_motor_power(PORT_B, 50);
 	  BP.set_motor_power(PORT_C, 50);
-    for(unsignd int i = 0; i < 50; i++){
+    for(int i = 0; i < 50; i++){
       if(getlight() > 90){
         done++;
         break;
