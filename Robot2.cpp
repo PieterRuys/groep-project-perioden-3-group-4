@@ -64,7 +64,7 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
 	int done = 0;
 	move_aside();
 	while(done == 0){
-		forward(2);
+		forward(1);
 		turn_left();
 		if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
 			if(Ultrasonic2.cm < 20){
@@ -79,6 +79,7 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
 						cout << "check" << endl;
 						BP.set_motor_power(PORT_B, 20);
 						BP.set_motor_power(PORT_C, 20);
+						sleep(0.5);
 						turn_right();
 						break;
 					}
