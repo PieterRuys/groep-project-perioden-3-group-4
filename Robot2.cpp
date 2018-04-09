@@ -83,7 +83,7 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
 						break;
 					}
 				}
-				done++
+				done++;
 			}
  		}
 	}
