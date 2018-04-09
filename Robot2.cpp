@@ -67,7 +67,10 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
 		forward(1);
 		turn_left();
 		if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
-			if(Ultrasonic2.cm < 30){
+			if(getlight() > 90){
+				done++;
+			}
+			else if(Ultrasonic2.cm < 30){
 				turn_right();
 			}
 			else{
