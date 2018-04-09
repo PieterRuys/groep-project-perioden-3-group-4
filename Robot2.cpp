@@ -35,8 +35,8 @@ int16_t getcolor(){
 void turn_left(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	BP.set_motor_position_relative(PORT_B, -550);
-	BP.set_motor_position_relative(PORT_C, 550);
+	BP.set_motor_position_relative(PORT_B, -500);
+	BP.set_motor_position_relative(PORT_C, 500);
 	sleep(1);
 }
 
@@ -67,7 +67,7 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
 		forward(2);
 		turn_left();
 		if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
-			if(Ultrasonic2.cm < 30){
+			if(Ultrasonic2.cm < 20){
 				turn_right();
 			}
 			else{
