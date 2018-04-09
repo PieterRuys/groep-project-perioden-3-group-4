@@ -16,6 +16,22 @@ uint16_t MaxColor;
 sensor_light_t mylight;
 sensor_color_t mycolor;
 
+int16_t getlight(){
+  BP.get_sensor(PORT_3, mylight);
+  int16_t val = mylight.reflected;
+  if (val < MinLight) val = MinLight;
+  if (val > MaxLight) val = MaxLight;
+  return (100*(val - MinLight))/(MaxLight - MinLight);
+}
+
+int16_t getcolor(){
+  BP.get_sensor(PORT_1, mycolor);
+  uint16_t val = mycolor.reflected_red;
+  if (val < MinColor) val = MinColor;
+  if (val > MaxColor) val = MaxColor;
+  return (100*(val - MinColor))/(MaxColor - MinColor);
+}
+
 void turn_left(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
@@ -65,22 +81,6 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
 			}
  		}
 	}
-}
-
-int16_t getlight(){
-  BP.get_sensor(PORT_3, mylight);
-  int16_t val = mylight.reflected;
-  if (val < MinLight) val = MinLight;
-  if (val > MaxLight) val = MaxLight;
-  return (100*(val - MinLight))/(MaxLight - MinLight);
-}
-
-int16_t getcolor(){
-  BP.get_sensor(PORT_1, mycolor);
-  uint16_t val = mycolor.reflected_red;
-  if (val < MinColor) val = MinColor;
-  if (val > MaxColor) val = MaxColor;
-  return (100*(val - MinColor))/(MaxColor - MinColor);
 }
 
 int main(){
