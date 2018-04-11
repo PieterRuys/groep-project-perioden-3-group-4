@@ -131,7 +131,7 @@ int main(){
 		    }
  	    }
     if (lightval <= 70){
-      BP.set_motor_power(PORT_B, (20+(70-lightval)/1.5));
+      BP.set_motor_power(PORT_B, (20+(60-lightval)/1.5));
       BP.set_motor_power(PORT_C, (20-(80-lightval)/1.5));
     }
     else if (colorval <= 70){
