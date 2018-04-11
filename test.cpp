@@ -14,7 +14,7 @@ uint16_t MAX1;
 uint16_t MIN2;
 uint16_t MAX2;
 sensor_color_t kleur1;
-sensor_color_t kleur2;
+sensor_light_t kleur2;
 
 
 //measure reflected light
