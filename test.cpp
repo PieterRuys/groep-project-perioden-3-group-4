@@ -39,7 +39,7 @@ int16_t measureLight2(){
 	uint16_t val = kleur2.reflected;
 	if (val < MIN2) val = MIN2;
 	if (val > MAX2) val = MAX2;
-	return 100-((100*(val - MIN2))/(MAX2 - MIN2));
+	return (100*(val - MIN2))/(MAX2 - MIN2);
 }
 
 
