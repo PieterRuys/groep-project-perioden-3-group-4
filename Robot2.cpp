@@ -60,7 +60,7 @@ void move_aside(void){
 	turn_left();
 }
 void move_and_check(sensor_ultrasonic_t Ultrasonic2){
-	int done == 0
+	int done == 0;
 	while(done < 2){
 		forward(1);
 		turn_left();
