@@ -140,8 +140,7 @@ if (lightval2 <= 60) { BP.set_motor_dps(PORT_B, 0); BP.set_motor_dps(PORT_C, 120
 if(lightval1 > 70 && lightval2 > 70){    BP.set_motor_dps(PORT_B, 100);    BP.set_motor_dps(PORT_C, 25);
     usleep(100000);
  }   
-  
-}
+ 
   
   
  void exit_signal_handler(int signo){
