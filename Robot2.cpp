@@ -49,14 +49,14 @@ void turn_right(void){
 }
 
 void forward(int time){
-	BP.set_motor_power(PORT_B, 50);
-	BP.set_motor_power(PORT_C, 50);
+	BP.set_motor_power(PORT_B, 30);
+	BP.set_motor_power(PORT_C, 30);
 	sleep(time);
 }
 
 void move_aside(void){
 	turn_right();
-	forward(1);
+	forward(2);
 	turn_left();
 }
 
