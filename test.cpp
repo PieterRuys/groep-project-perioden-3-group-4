@@ -36,10 +36,10 @@ int16_t measureLight1() {
 int16_t measureLight2(){
 
 	BP.get_sensor(PORT_3, kleur2);
-	uint16_t val = kleur2.reflected_red;
+	uint16_t val = kleur2.reflected;
 	if (val < MIN2) val = MIN2;
 	if (val > MAX2) val = MAX2;
-	return (100*(val - MIN2))/(MAX2 - MIN2);
+	return 100-((100*(val - MIN2))/(MAX2 - MIN2));
 }
 
 
@@ -71,7 +71,7 @@ int main(){
 
   BP.set_sensor_type(PORT_1, SENSOR_TYPE_NXT_COLOR_RED);
   BP.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
-  BP.set_sensor_type(PORT_3, SENSOR_TYPE_NXT_COLOR_RED);
+  BP.set_sensor_type(PORT_3, SENSOR_TYPE_NXT_LIGHT_ON);
 
   sensor_ultrasonic_t Ultrasonic2;
 
@@ -83,7 +83,7 @@ int main(){
   MIN1 = kleur1.reflected_red;
   cout << "MIN1 = " << MIN1 << endl;
   BP.get_sensor(PORT_3, kleur2);
-  MIN2 = kleur2.reflected_red;
+  MIN2 = kleur2.reflected;
   cout << "MIN2 = " << MIN2 << endl;
   cout << "SENSOR naast lijn (wit) voer in 'b'gevolgd door enter" << endl;
   cin >> regel;
@@ -91,7 +91,7 @@ int main(){
   MAX1 = kleur1.reflected_red;
   cout << "MAX1 = " << MAX1 << endl;
   BP.get_sensor(PORT_3, kleur2);
-  MAX2 = kleur2.reflected_red;
+  MAX2 = kleur2.reflected;
   cout << "MAX2 = " << MAX2 << endl;
   cout << "plaats het voertuig met de sensor half boven de lijn en voer in c gevolgd door enter" << endl;
   cin >> regel;
