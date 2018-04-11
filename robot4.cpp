@@ -141,7 +141,7 @@ if(lightval1 > 70 && lightval2 > 70){    BP.set_motor_dps(PORT_B, 100);    BP.se
 }
 usleep(100000);
 }
- 
+}
   
   
  void exit_signal_handler(int signo){
