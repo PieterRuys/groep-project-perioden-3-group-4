@@ -60,22 +60,22 @@ int main(){
   
   int16_t lightval;
   int16_t colorval;
-  int16_t power = 20;
+  int16_t power = 10;
   
   while(true){
     lightval = getlight();
     colorval = getcolor();
     cout << lightval << endl;
     cout << colorval << endl;
-    if (lightval > 10){
+    if (lightval > 40){
       BP.set_motor_power(PORT_B, power+((lightval-20)/1.5));
-      BP.set_motor_power(PORT_C, power-((lightval-20)/1.5));
+      BP.set_motor_power(PORT_C, -((lightval-20)/1.5));
     }
-    if (colorval < 90){
-      BP.set_motor_power(PORT_B, power-((80-colorval)/1.5));
+    if (colorval < 60){
+      BP.set_motor_power(PORT_B, -((80-colorval)/1.5));
       BP.set_motor_power(PORT_C, power+((80-colorval)/1.5));
     }
-    if(lightval < 10 && colorval > 90){
+    if(lightval < 40 && colorval > 60){
       BP.set_motor_power(PORT_B, power);
       BP.set_motor_power(PORT_C, power);
     }
