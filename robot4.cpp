@@ -121,29 +121,29 @@ while(true){
 lightval1 = getlight();
 lightval2 = getcolor();
  cout << lightval1 << "\n"; cout << lightval2 << "\n"; 
-BP.set_motor_dps(PORT_B, 240); 
-BP.set_motor_dps(PORT_C, 240); 
+BP.set_motor_dps(PORT_B, 480); 
+BP.set_motor_dps(PORT_C, 480); 
 if((lightval1 <= 50) && (lightval2 <= 50)){
-BP.set_motor_dps(PORT_B, 240); BP.set_motor_dps(PORT_C, 240);    
+BP.set_motor_dps(PORT_B, 480); BP.set_motor_dps(PORT_C, 480);    
 usleep(10000);
 }
 if((lightval1 <= 50) && (lightval2 <= 50)){
 BP.set_motor_dps(PORT_B, 0);    BP.set_motor_dps(PORT_C, 0);
 }
 if (lightval1 <= 50){ 
-BP.set_motor_dps(PORT_B, 300); BP.set_motor_dps(PORT_C, 0); 
+BP.set_motor_dps(PORT_B, 600); BP.set_motor_dps(PORT_C, 0); 
 }
 if (lightval2 <= 50){
-BP.set_motor_dps(PORT_B, 0); BP.set_motor_dps(PORT_C, 300); 
+BP.set_motor_dps(PORT_B, 0); BP.set_motor_dps(PORT_C, 600); 
 }
 if (lightval1 <= 60){
-BP.set_motor_dps(PORT_B, 240); BP.set_motor_dps(PORT_C, 0);
+BP.set_motor_dps(PORT_B, 480); BP.set_motor_dps(PORT_C, 0);
 } 
 if (lightval2 <= 60) { 
-BP.set_motor_dps(PORT_B, 0); BP.set_motor_dps(PORT_C, 240);    
+BP.set_motor_dps(PORT_B, 0); BP.set_motor_dps(PORT_C, 480);    
 } 
 if(lightval1 > 70 && lightval2 > 70){
-BP.set_motor_dps(PORT_B, 200);    BP.set_motor_dps(PORT_C, 50);
+BP.set_motor_dps(PORT_B, 400);    BP.set_motor_dps(PORT_C, 100);
 }
 usleep(100000);
 }
