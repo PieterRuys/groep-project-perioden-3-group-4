@@ -16,6 +16,7 @@ uint16_t MaxColor;
 sensor_light_t mylight;
 sensor_color_t mycolor;
 
+// Calculates the percentage of light
 int16_t getlight(){
   BP.get_sensor(PORT_3, mylight);
   int16_t val = mylight.reflected;
@@ -24,6 +25,7 @@ int16_t getlight(){
   return 100-((100*(val - MinLight))/(MaxLight - MinLight));
 }
 
+// Calculates the percentage of light
 int16_t getcolor(){
   BP.get_sensor(PORT_1, mycolor);
   uint16_t val = mycolor.reflected_red;
@@ -90,12 +92,13 @@ int main(){
 
   BP.detect(); // Make sure that the BrickPi3 is communicating and that the firmware is compatible with the drivers.
 
+  // Sets the ports of the brickpi for the use of the different sensors
   BP.set_sensor_type(PORT_3, SENSOR_TYPE_NXT_LIGHT_ON);
   BP.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
   BP.set_sensor_type(PORT_1, SENSOR_TYPE_NXT_COLOR_RED);
-  
   sensor_ultrasonic_t Ultrasonic2;
   
+  // Calculates the reflectian values for the colors black and white
   string regel;
   cout << "plaats sensor recht boven de lijn (zwart) en voer in a gevolgd door enter" << endl;
   cin >> regel;
@@ -105,7 +108,7 @@ int main(){
   MinColor = mycolor.reflected_red;
   cout << "MaxLight =" << MaxLight << endl;
   cout << "MinColor =" << MinColor << endl;
-  cout << "plaats sensor recht boven de lijn (wit) en voer in a gevolgd door enter" << endl;
+  cout << "Plaats de sensoren recht boven de lijn (wit) en voer in a gevolgd door enter" << endl;
   cin >> regel;
   BP.get_sensor(PORT_3, mylight);
   BP.get_sensor(PORT_1, mycolor);
@@ -113,11 +116,14 @@ int main(){
   MaxColor = mycolor.reflected_red;
   cout << "MinLight =" << MinLight << endl;
   cout << "MaxColor =" << MaxColor << endl;
+  cout << "Plaats de robot op de lijn en voer in a gevolgd door enter" << endl;
+  cin >> regel;
   
   int16_t lightval;
   int16_t colorval;
   
   while(true){
+    // Calculates the current percentage of light on both of the sensors
     lightval = getlight();
     colorval = getcolor();
     cout << lightval << endl;
@@ -127,14 +133,20 @@ int main(){
 			    dodge(Ultrasonic2);
 		    }
  	    }
+    // Turning right
+    // If the percentage of light from the first sensor is below or equal to 70 the motors get power based on the percentage of light
     if (lightval <= 70){
       BP.set_motor_power(PORT_B, (20+(60-lightval)/1.5));
       BP.set_motor_power(PORT_C, (20-(80-lightval)/1.5));
     }
+    // Turning left
+    // If the percentage of light from the second sensor is below or equal to 70 the motors get power based on the percentage of light
     else if (colorval <= 70){
       BP.set_motor_power(PORT_B, (20-(80-colorval)/1.5));
       BP.set_motor_power(PORT_C, (20+(70-colorval)/1.5));
     }
+    // Going straight
+    // If the percentage of light from both of the sensors are above 40 both of the motors get an equal amount of power
     else if(lightval > 40 && colorval > 40){
       BP.set_motor_power(PORT_B, 20);
       BP.set_motor_power(PORT_C, 20);
