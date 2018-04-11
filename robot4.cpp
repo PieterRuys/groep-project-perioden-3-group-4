@@ -21,7 +21,7 @@ int16_t getlight(){
   int16_t val = mylight.reflected;
   if (val < MinLight) val = MinLight;
   if (val > MaxLight) val = MaxLight;
-  return (100*(val - MinLight))/(MaxLight - MinLight);
+  return (100-(100*(val - MinLight))/(MaxLight - MinLight));
 }
 
 int16_t getcolor(){
@@ -117,35 +117,27 @@ int main(){
   int16_t colorval;
   int16_t power = 20;
   
-  while(true){
-    lightval = getlight();
-    colorval = getcolor();
-    cout << lightval << endl;
-    cout << colorval << endl;
-    if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
-		    if(Ultrasonic2.cm < 10){
-			    dodge(Ultrasonic2);
-		    }
- 	    }
-    if (lightval > 30){
-      BP.set_motor_power(PORT_B, power+((lightval-30)/1.5));
-      BP.set_motor_power(PORT_C, power-((lightval-30)/1.5));
-    }
-    if (colorval < 70){
-      BP.set_motor_power(PORT_B, power-((70-lightval)/1.5));
-      BP.set_motor_power(PORT_C, power+((70- lightval)/1.5));
-    }
-    if(lightval < 30 && colorval > 50){
-      BP.set_motor_power(PORT_B, power);
-      BP.set_motor_power(PORT_C, power);
-    }
-    if(colorval < 5 && lightval > 90){
-      	BP.set_motor_power(PORT_B, 0);
-	BP.set_motor_power(PORT_C, 0);
-	BP.set_motor_position_relative(PORT_B, 250);
-	BP.set_motor_position_relative(PORT_C, -250);
-	sleep(1);
-    }
+while(true){ 
+lightval1 = getlight();
+lightval2 = getcolor();
+ cout << lightval1 << "\n"; cout << lightval2 << "\n"; BP.set_motor_dps(PORT_B, 120); BP.set_motor_dps(PORT_C, 120); if((lightval1 <= 50) && (lightval2 <= 50)){
+ BP.set_motor_dps(PORT_B, 120); BP.set_motor_dps(PORT_C, 120);    usleep(10000);
+}
+if((lightval1 <= 50) && (lightval2 <= 50)){
+BP.set_motor_dps(PORT_B, 0);    BP.set_motor_dps(PORT_C, 0);
+}
+if (lightval1 <= 50){ 
+BP.set_motor_dps(PORT_B, 150); BP.set_motor_dps(PORT_C, 0); 
+}
+if (lightval2 <= 50){
+BP.set_motor_dps(PORT_B, 0); BP.set_motor_dps(PORT_C, 150); 
+}
+if (lightval1 <= 60){
+BP.set_motor_dps(PORT_B, 120); BP.set_motor_dps(PORT_C, 0);
+} 
+if (lightval2 <= 60) { BP.set_motor_dps(PORT_B, 0); BP.set_motor_dps(PORT_C, 120);    
+} 
+if(lightval1 > 70 && lightval2 > 70){    BP.set_motor_dps(PORT_B, 100);    BP.set_motor_dps(PORT_C, 25);
     usleep(100000);
  }   
   
