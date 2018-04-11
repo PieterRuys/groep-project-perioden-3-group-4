@@ -120,17 +120,17 @@ int main(){
 			    dodge(Ultrasonic2);
 		    }
  	    }
-    if (lightval > 30){
-      BP.set_motor_power(PORT_B, power+((lightval-30)/2.0));
-      BP.set_motor_power(PORT_C, power-((lightval-10)/1.5));
+    if (lightval > 40){
+      BP.set_motor_power(PORT_B, power+((lightval-20)/1.5));
+      BP.set_motor_power(PORT_C, -((lightval-40)/1.5));
     }
-    if (colorval < 70){
-      BP.set_motor_power(PORT_B, power-((70-lightval)/1.5));
-      BP.set_motor_power(PORT_C, power+((70- lightval)/1.5));
+    else if (colorval < 60){
+      BP.set_motor_power(PORT_B, -((80-colorval)/1.5));
+      BP.set_motor_power(PORT_C, power+((80-colorval)/1.5));
     }
-    if(lightval < 30 && colorval > 70){
-      BP.set_motor_power(PORT_B, power);
-      BP.set_motor_power(PORT_C, power);
+    else if(lightval < 40 && colorval > 60){
+      BP.set_motor_power(PORT_B, power+5);
+      BP.set_motor_power(PORT_C, power+5);
     }
     usleep(100000);
  }   
