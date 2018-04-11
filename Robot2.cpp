@@ -108,7 +108,6 @@ int main(){
   
   int16_t lightval;
   int16_t colorval;
-  int16_t power = 10;
   
   while(true){
     lightval = getlight();
@@ -121,16 +120,16 @@ int main(){
 		    }
  	    }
     if (lightval > 40){
-      BP.set_motor_power(PORT_B, power+((lightval-40)/1.5));
+      BP.set_motor_power(PORT_B, 10+((lightval-40)/1.5));
       BP.set_motor_power(PORT_C, 20-((lightval-40)/1.5));
     }
     else if (colorval < 60){
       BP.set_motor_power(PORT_B, 20-((80-colorval)/1.5));
-      BP.set_motor_power(PORT_C, power+((80-colorval)/1.5));
+      BP.set_motor_power(PORT_C, 10+((80-colorval)/1.5));
     }
     else if(lightval < 40 && colorval > 60){
-      BP.set_motor_power(PORT_B, power+5);
-      BP.set_motor_power(PORT_C, power+5);
+      BP.set_motor_power(PORT_B, 20);
+      BP.set_motor_power(PORT_C, 20);
     }
     usleep(100000);
  }   
