@@ -26,7 +26,7 @@ int16_t getlight(){
 
 int16_t getcolor(){
   BP.get_sensor(PORT_1, mycolor);
-  uint16_t val = mycolor.reflected_full;
+  uint16_t val = mycolor.reflected;
   if (val < MinColor) val = MinColor;
   if (val > MaxColor) val = MaxColor;
   return (100*(val - MinColor))/(MaxColor - MinColor);
@@ -46,7 +46,7 @@ int main(){
   BP.get_sensor(PORT_3, mylight);
   BP.get_sensor(PORT_1, mycolor);
   MaxLight = mylight.reflected;
-  MinColor = mycolor.reflected_full;
+  MinColor = mycolor.reflected;
   cout << "MaxLight =" << MaxLight << endl;
   cout << "MinColor =" << MinColor << endl;
   cout << "plaats sensor recht boven de lijn (wit) en voer in a gevolgd door enter" << endl;
@@ -54,7 +54,7 @@ int main(){
   BP.get_sensor(PORT_3, mylight);
   BP.get_sensor(PORT_1, mycolor);
   MinLight = mylight.reflected;
-  MaxColor = mycolor.reflected_full;
+  MaxColor = mycolor.reflected;
   cout << "MinLight =" << MinLight << endl;
   cout << "MaxColor =" << MaxColor << endl;
   
