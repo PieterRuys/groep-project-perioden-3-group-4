@@ -113,8 +113,8 @@ int main(){
   cout << "MinLight =" << MinLight << endl;
   cout << "MaxColor =" << MaxColor << endl;
   
-  int16_t lightval;
-  int16_t colorval;
+  int16_t lightval1;
+  int16_t colorval2;
   int16_t power = 20;
   
 while(true){ 
