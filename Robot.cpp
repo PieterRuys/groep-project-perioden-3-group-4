@@ -59,33 +59,30 @@ void move_aside(void){
 	forward(2);
 	turn_left();
 }
-
-void dodge(sensor_ultrasonic_t Ultrasonic2){
+void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 	int done = 0;
-	move_aside();
-	while(done == 0){
-		forward(1);
+	while(done < 2){
+		if(done == 0){
+			forward(2);
+		}
+		else{
+			forward(1);
+		}
 		turn_left();
 		if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
 			if(Ultrasonic2.cm < 30){
 				turn_right();
 			}
 			else{
-				BP.set_motor_power(PORT_B, 30);
-				BP.set_motor_power(PORT_C, 30);
-				while(true){
-					if(getlight() > 60){
-						BP.set_motor_power(PORT_B, 40);
-						BP.set_motor_power(PORT_C, 40);
-						sleep(1);
-						turn_right();
-						break;
-					}
-				}
-			done++;
+				done++;
 			}
  		}
 	}
+}
+
+void dodge(sensor_ultrasonic_t Ultrasonic2){
+	turn_right();
+	move_and_check(Ultrasonic2);
 }
 
 int main(){
@@ -130,15 +127,15 @@ int main(){
 			    dodge(Ultrasonic2);
 		    }
  	    }
-    if (lightval <= 60){
-      BP.set_motor_power(PORT_B, 20+((80-lightval)/1.5));
-      BP.set_motor_power(PORT_C, 20-((80-lightval)/1.5));
+    if (lightval <= 70){
+      BP.set_motor_power(PORT_B, (20+(60-lightval)/1.5));
+      BP.set_motor_power(PORT_C, (20-(80-lightval)/1.5));
     }
-    else if (colorval <= 60){
-      BP.set_motor_power(PORT_B, 20-((80-colorval)/1.5));
-      BP.set_motor_power(PORT_C, 20+((80-colorval)/1.5));
+    else if (colorval <= 70){
+      BP.set_motor_power(PORT_B, (20-(80-colorval)/1.5));
+      BP.set_motor_power(PORT_C, (20+(70-colorval)/1.5));
     }
-    else if(lightval > 60 && colorval > 60){
+    else if(lightval > 40 && colorval > 40){
       BP.set_motor_power(PORT_B, 20);
       BP.set_motor_power(PORT_C, 20);
     }
