@@ -60,7 +60,7 @@ int main(){
   
   int16_t lightval;
   int16_t colorval;
-  int16_t power = 20;
+  int16_t power = 10;
   
   while(true){
     lightval = getlight();
