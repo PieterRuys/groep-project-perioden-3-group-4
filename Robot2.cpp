@@ -108,7 +108,7 @@ int main(){
   
   int16_t lightval;
   int16_t colorval;
-  int16_t power = 20;
+  int16_t power = 10;
   
   while(true){
     lightval = getlight();
@@ -120,15 +120,15 @@ int main(){
 			    dodge(Ultrasonic2);
 		    }
  	    }
-    if (lightval > 30){
+    if (lightval > 40){
       BP.set_motor_power(PORT_B, power+((lightval-30)/1.5));
       BP.set_motor_power(PORT_C, power-((lightval-30)/1.5));
     }
-    if (colorval < 70){
+    if (colorval < 60){
       BP.set_motor_power(PORT_B, power-((70-lightval)/1.5));
       BP.set_motor_power(PORT_C, power+((70- lightval)/1.5));
     }
-    if(lightval < 30 && colorval > 50){
+    if(lightval < 40 && colorval > 60){
       BP.set_motor_power(PORT_B, power);
       BP.set_motor_power(PORT_C, power);
     }
