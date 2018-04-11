@@ -9,21 +9,27 @@ BrickPi3 BP;
 
 void exit_signal_handler(int signo);
 
-uint16_t Light;
-uint16_t Color;
+uint16_t MinLight;
+uint16_t MinColor;
+uint16_t MaxLight;
+uint16_t MaxColor;
 sensor_light_t mylight;
 sensor_color_t mycolor;
 
 int16_t getlight(){
   BP.get_sensor(PORT_3, mylight);
   int16_t val = mylight.reflected;
-  return (Light-val);
+  if (val < MinLight) val = MinLight;
+  if (val > MaxLight) val = MaxLight;
+  return (100*(val - MinLight))/(MaxLight - MinLight);
 }
 
-int16_t measureLight(){
+int16_t getcolor(){
   BP.get_sensor(PORT_1, mycolor);
   uint16_t val = mycolor.reflected_red;
-  return (Color-val);
+  if (val < MinColor) val = MinColor;
+  if (val > MaxColor) val = MaxColor;
+  return (100*(val - MinColor))/(MaxColor - MinColor);
 }
 
 int main(){
@@ -39,28 +45,39 @@ int main(){
   cin >> regel;
   BP.get_sensor(PORT_3, mylight);
   BP.get_sensor(PORT_1, mycolor);
-  Light = mylight.reflected;
-  Color = mycolor.reflected_red;
-  cout << "Light =" << Light << endl;
-  cout << "Color =" << Color << end1;
+  MaxLight = mylight.reflected;
+  MinColor = mycolor.reflected_red;
+  cout << "MaxLight =" << MaxLight << endl;
+  cout << "MinColor =" << MinColor << endl;
+  cout << "plaats sensor recht boven de lijn (wit) en voer in a gevolgd door enter" << endl;
+  cin >> regel;
+  BP.get_sensor(PORT_3, mylight);
+  BP.get_sensor(PORT_1, mycolor);
+  MinLight = mylight.reflected;
+  MaxColor = mycolor.reflected_red;
+  cout << "MinLight =" << MinLight << endl;
+  cout << "MaxColor =" << MaxColor << endl;
   
   int16_t lightval;
-  int16_t lightval2;
-  int16_t power = 20;
+  int16_t colorval;
+  int16_t power = 10;
   
   while(true){
     lightval = getlight();
-    if (lightval <= 50 && lightval2 > 60){
-      BP.set_motor_power(PORT_B, -10);
-      BP.set_motor_power(PORT_C, (100-lightval));
+    colorval = getcolor();
+    cout << lightval << endl;
+    cout << colorval << endl;
+    if (lightval > 40){
+      BP.set_motor_power(PORT_B, power+((lightval-20)/1.5));
+      BP.set_motor_power(PORT_C, -((lightval-40)/1.5));
     }
-    if (lightval > 60 && lightval2 <= 40){
-      BP.set_motor_power(PORT_B, (lightval-40));
-      BP.set_motor_power(PORT_C, -10);
+    else if (colorval < 60){
+      BP.set_motor_power(PORT_B, -((80-colorval)/1.5));
+      BP.set_motor_power(PORT_C, power+((80-colorval)/1.5));
     }
-    else{
-      BP.set_motor_power(PORT_B, 30);
-      BP.set_motor_power(PORT_C, 30);
+    else if(lightval < 40 && colorval > 60){
+      BP.set_motor_power(PORT_B, power+5);
+      BP.set_motor_power(PORT_C, power+5);
     }
     usleep(100000);
  }   
