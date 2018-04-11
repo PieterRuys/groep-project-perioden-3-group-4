@@ -38,7 +38,7 @@ int main(){
   BP.detect(); // Make sure that the BrickPi3 is communicating and that the firmware is compatible with the drivers.
 
   BP.set_sensor_type(PORT_3, SENSOR_TYPE_NXT_LIGHT_ON);
-  BP.set_sensor_type(PORT_1, SENSOR_TYPE_NXT_COLOR_FULL);
+  BP.set_sensor_type(PORT_1, SENSOR_TYPE_NXT_COLOR_RED);
   
   string regel;
   cout << "plaats sensor recht boven de lijn (zwart) en voer in a gevolgd door enter" << endl;
