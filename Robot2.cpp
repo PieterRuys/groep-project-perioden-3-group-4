@@ -59,11 +59,9 @@ void move_aside(void){
 	forward(2);
 	turn_left();
 }
-
-void dodge(sensor_ultrasonic_t Ultrasonic2){
-	int done = 0;
-	move_aside();
-	while(done == 0){
+void move_and_check(sensor_ultrasonic_t Ultrasonic2){
+	int done == 0
+	while(done < 2){
 		forward(1);
 		turn_left();
 		if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
@@ -71,10 +69,15 @@ void dodge(sensor_ultrasonic_t Ultrasonic2){
 				turn_right();
 			}
 			else{
-			done++;
+				done++;
 			}
  		}
 	}
+}
+
+void dodge(sensor_ultrasonic_t Ultrasonic2){
+	turn_right();
+	move_and_check(Ultrasonic2);
 }
 
 int main(){
