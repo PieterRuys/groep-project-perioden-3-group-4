@@ -74,22 +74,21 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 	}
 	BP.set_motor_power(PORT_B, 30);
 	BP.set_motor_power(PORT_C, 30);
-	while(true){
+	int checkpoint = 0
+	while(checkpoint == 0){
 		if(getcolor() == 0){
 			cout << "check" << endl;
-			BP.set_motor_power(PORT_B, 30);
-			BP.set_motor_power(PORT_C, 30);
 			sleep(1);
-			break;
+			checkpoint++
 		}
 	}
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	while(true){
+	while(chekpoint == 1){
 		usleep(100000);
 		if(getcolor() == 0){
 			cout << "check2" << endl;
-			break;
+			checkpoint++;
 		}
 		else{
 			BP.set_motor_position_relative(PORT_B, 20);
