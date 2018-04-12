@@ -56,9 +56,10 @@ void robot_turn_left(void){
 void robot_turn_right(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	while(true){
+	int break = 0;
+	while(break < 1){
 		if(getcolor() == 0){
-			break;
+			break++;
 		}
         usleep(100000);
 		if(getcolor() != 0){
