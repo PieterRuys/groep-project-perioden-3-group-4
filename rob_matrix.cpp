@@ -60,7 +60,7 @@ void robot_turn_right(void){
 //	BP.set_motor_position_relative(PORT_B, -200);
 //	BP.set_motor_position_relative(PORT_C, 200);
 	while(stop < 1){
-		if(getcolor() <= 10){
+		if(getcolor() <= 20){
 			stop++;
 		}
         usleep(10000);
