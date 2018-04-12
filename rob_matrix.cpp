@@ -62,7 +62,6 @@ void robot_turn_right(void){
 }
 
 bool next_crosing_free(sensor_ultrasonic_t Ultrasonic2){
-	cout << "cehck" << endl;
  	if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
 		cout << Ultrasonic2.cm << endl;
 		if(Ultrasonic2.cm < 10){
@@ -139,7 +138,7 @@ bool pos_move_one_step(struct Pos &pos, int direction) {
 bool detect_obstacle_ahead(struct Pos rob_pos, int direction, sensor_ultrasonic_t Ultrasonic2){
 	if ( pos_move_one_step(rob_pos, direction) ) {
 		cout << "hoi" << endl;
-	if(!next_crosing_free(Ultrasonic2)) board[rob_pos.x][rob_pos.y] = 'X';
+	if(next_crosing_free(Ultrasonic2)) board[rob_pos.x][rob_pos.y] = 'X';
 	//if ( rob_pos.x == 2 && rob_pos.y == 0 ) board[rob_pos.x][rob_pos.y] = 'X';//temporary obstacel
 	}
 }
