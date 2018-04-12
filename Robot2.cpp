@@ -73,13 +73,15 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 			for(int x = 0; x < 300; x++){
 				if(get_line()){
 					cout << "check3" << endl;
-					done++;
+					done = 3;
 					break;
 				}
 				usleep(10000);
 			}
 		}
-		turn_left();
+		if(done != 3){
+			turn_left();
+		}
 		if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
 			if(Ultrasonic2.cm < 30){
 				turn_right();
