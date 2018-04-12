@@ -26,6 +26,9 @@ struct Pos {
     int y;
 };
 
+struct Pos rob_pos;
+int rob_dir;
+
 void turn_left(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
