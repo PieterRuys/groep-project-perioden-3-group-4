@@ -1,7 +1,7 @@
-#include "BrickPi3.h" // for BrickPi3
-#include <iostream>      // for cin and cout
-#include <unistd.h>     // for usleep
-#include <signal.h>     // for catching exit signals
+#include "BrickPi3.h"	// for BrickPi3
+#include <iostream>	// for cin and cout
+#include <unistd.h>	// for usleep
+#include <signal.h>	// for catching exit signals
 
 using namespace std;
 
