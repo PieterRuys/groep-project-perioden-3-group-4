@@ -213,6 +213,8 @@ int main() {
     MaxColor = mycolor.reflected_red;
     cout << "MinLight =" << MinLight << endl;
     cout << "MaxColor =" << MaxColor << endl;
+	cout << "klaar?" << endl;
+	cin >> regel;
 
     init_board();
     struct Pos rob_pos = {0, 0};
