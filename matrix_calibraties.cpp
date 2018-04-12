@@ -67,7 +67,9 @@ bool next_crosing_free(sensor_ultrasonic_t Ultrasonic2){
 
 void forward_one_step(){
   while(true){
+
     int16_t lightval = getlight();
+cout << lightval << endl;
     
     if(lightval == 0){
       //drive until you are on the crossing
