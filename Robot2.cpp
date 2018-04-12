@@ -65,6 +65,8 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 	int done = 0;
 	int time;
 	while(done < 2){
+		BP.set_motor_power(PORT_B, 30);
+		BP.set_motor_power(PORT_C, 30);
 		if(done == 1){
 			time = 30;
 		}
