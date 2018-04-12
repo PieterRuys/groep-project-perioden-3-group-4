@@ -77,7 +77,7 @@ void robot_forward_one_step(){
   while(true){
     int16_t colorval = getcolor();
     int16_t lightval = getlight();
-    cout << lightval << endl;
+    //cout << lightval << endl;
     
     if(lightval <= 20 && colorval <= 20){
       //drive until you are on the crossing
