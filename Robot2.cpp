@@ -58,12 +58,7 @@ void forward(int time){
 void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 	int done = 0;
 	while(done < 2){
-		if(done == 0){
-			forward(3);
-		}
-		else{
-			forward(3);
-		}
+		forward(3);
 		turn_left();
 		if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
 			if(Ultrasonic2.cm < 30){
