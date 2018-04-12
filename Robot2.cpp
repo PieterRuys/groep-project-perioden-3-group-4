@@ -65,7 +65,8 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 	int done = 0;
 	while(done < 2){
 		if(done == 0){
-			forward(2)
+			turn_right();
+			forward(2);
 		}
 		else{
 			for(int x = 0; x < 30; x++){
