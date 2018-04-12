@@ -60,22 +60,6 @@ void robot_turn_right(void){
 	BP.set_motor_position_relative(PORT_C, -560);
 	sleep(1);
 }
-//	BP.set_motor_power(PORT_B, 0);
-//	BP.set_motor_power(PORT_C, 0);
-//	int stop = 0;
-//	BP.set_motor_position_relative(PORT_B, -200);
-//	BP.set_motor_position_relative(PORT_C, 200);
-//	while(stop < 1){
-//		if(getcolor() <= 20){
-//			stop++;
-//		}
-  //      usleep(10000);
-	//	if(getcolor() != 0){
-//			BP.set_motor_position_relative(PORT_B, 20);
-//			BP.set_motor_position_relative(PORT_C, -20);
-//		}
-//	}	
-//}
 
 bool next_crosing_free(sensor_ultrasonic_t Ultrasonic2){
  	if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
@@ -151,8 +135,8 @@ bool pos_move_one_step(struct Pos &pos, int direction) {
 
 bool detect_obstacle_ahead(struct Pos rob_pos, int direction){
 	if ( pos_move_one_step(rob_pos, direction) ) {
-	//put real object detection here
-	if ( rob_pos.x == 2 && rob_pos.y == 0 ) board[rob_pos.x][rob_pos.y] = 'X';//temporary obstacel
+	if(!next_crosing_free) board[rob_pos.x][rob_pos.y] = 'X';
+	//if ( rob_pos.x == 2 && rob_pos.y == 0 ) board[rob_pos.x][rob_pos.y] = 'X';//temporary obstacel
 	}
 }
 
