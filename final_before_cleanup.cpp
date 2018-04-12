@@ -72,8 +72,8 @@ void turn_left(void){	// This function first stops the robot, the sets te postio
 void turn_right(void){	// This function first stops the robot, the sets te postion in such a way that the robt makes a 90 degrees turn right
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	BP.set_motor_position_relative(PORT_B, 500);
-	BP.set_motor_position_relative(PORT_C, -500);
+	BP.set_motor_position_relative(PORT_B, 550);
+	BP.set_motor_position_relative(PORT_C, -550);
 	sleep(1);	
 }
 
@@ -87,6 +87,26 @@ bool get_line(){	// Returns true if one of the sensors is on black
 		return true;
 	}
 	return false;
+}
+
+void turn_search_line_l(){	// This code slowly turns left while looking for the line
+int checkpoint = 1;
+int counter = 0;
+    BP.set_motor_power(PORT_B, 0);
+	BP.set_motor_power(PORT_C, 0);
+	while(checkpoint == 1){
+		if(getlight() == 0){
+			checkpoint++;
+		}
+        usleep(100000);
+		if(getcolor() != 0){
+			BP.set_motor_position_relative(PORT_B, -20);
+			BP.set_motor_position_relative(PORT_C, 20);
+			counter ++;
+		}
+		cout << counter << endl;
+	}
+	cout << counter << endl;
 }
 
 void turn_back(int &done, sensor_ultrasonic_t Ultrasonic2){	// Looks if there is an obstacle in the way, if there is it will turn right and drive forward otherwise it wil just drive forward
@@ -135,26 +155,6 @@ void turn_search_line(int &checkpoint){	// This code slowly turns right while lo
 			BP.set_motor_position_relative(PORT_C, -20);
 		}
 	}
-}
-
-void turn_search_line_l(){	// This code slowly turns left while looking for the line
-int checkpoint = 1;
-int counter = 0;
-    BP.set_motor_power(PORT_B, 0);
-	BP.set_motor_power(PORT_C, 0);
-	while(checkpoint == 1){
-		if(getlight() == 0){
-			checkpoint++;
-		}
-        usleep(100000);
-		if(getcolor() != 0){
-			BP.set_motor_position_relative(PORT_B, -20);
-			BP.set_motor_position_relative(PORT_C, 20);
-			counter ++;
-		}
-		cout << counter << endl;
-	}
-	cout << counter << endl;
 }
 
 
