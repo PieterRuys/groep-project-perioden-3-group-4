@@ -161,6 +161,7 @@ void turn_search_line(int &checkpoint){	// This code slowly turns right while lo
 
 void move_and_check(sensor_ultrasonic_t Ultrasonic2){	// This is the code wich calls to most other codes and looks for different states
     int done = 0;
+	int check = 0;
 	int checkpoint = 0;
     turn_right();
     while(done < 2){
@@ -171,10 +172,10 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){	// This is the code wich c
 			check_for_line(done);
 		}
 		if(done != 3){
-			checkpoint = turn_back(done, Ultrasonic2);
+			check = turn_back(done, Ultrasonic2);
 		}
 	}
-	if(checkpoint != -1){
+	if(check != -1){
     		drive_until_line(checkpoint);
     		turn_search_line(checkpoint);
 	}
