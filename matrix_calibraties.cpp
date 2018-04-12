@@ -116,6 +116,8 @@ int main(){
   cout << "MinLight =" << MinLight << endl;
   cout << "MaxColor =" << MaxColor << endl;
 forward_one_step();
+turn_right();
+forward_one_step();
   
   
   
