@@ -191,7 +191,8 @@ int main(){
 	
   while(true){
    	control_motors();
-}
+  }
+}	
   
   
  void exit_signal_handler(int signo){
