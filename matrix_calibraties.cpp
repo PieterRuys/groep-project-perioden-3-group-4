@@ -5,6 +5,13 @@
 
 using namespace std;
 
+uint16_t MinLight;
+uint16_t MinColor;
+uint16_t MaxLight;
+uint16_t MaxColor;
+sensor_light_t mylight;
+sensor_color_t mycolor;
+
 BrickPi3 BP;
 
 void turn_left(void){
