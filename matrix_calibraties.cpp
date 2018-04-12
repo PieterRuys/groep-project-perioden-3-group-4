@@ -46,14 +46,15 @@ int16_t getcolor(){
 }
 
 bool next_crosing_free(sensor_ultrasonic_t Ultrasonic2){
-  if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
-			if(Ultrasonic2.cm < 10){
-				return true;
-			}
-			else{
-				return false;
-			}
- }
+ 	if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
+		if(Ultrasonic2.cm < 10){
+			return true;
+		}
+		else{
+			return false;
+		}
+  	}
+}
 
 void forward_one_step(){
   while(true){
@@ -102,6 +103,7 @@ int main(){
   MaxColor = mycolor.reflected_red;
   cout << "MinLight =" << MinLight << endl;
   cout << "MaxColor =" << MaxColor << endl;
+forward_one_step();
   
   
   
