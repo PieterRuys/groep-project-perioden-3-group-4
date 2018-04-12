@@ -89,26 +89,27 @@ bool get_line(){	// Returns true if one of the sensors is on black
 	return false;
 }
 
-void turn_search_line_l(){	// This code slowly turns left while looking for the line
+int turn_search_line_l(){	// This code slowly turns left while looking for the line
 int checkpoint = 1;
 int counter = 0;
    	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	for(int x = 0; x < 27; x++){
 		if(getlight() <= 0){
-			break;
+			return -1;
 		}
         	usleep(100000);
 		if(getlight() >= 0){
 			BP.set_motor_position_relative(PORT_B, -20);
 			BP.set_motor_position_relative(PORT_C, 20);
-			counter ++;
+			
 		}
 	}
+	return 1;
 }
 
 void turn_back(int &done, sensor_ultrasonic_t Ultrasonic2){	// Looks if there is an obstacle in the way, if there is it will turn right and drive forward otherwise it wil just drive forward
-    turn_search_line_l();
+    int check = turn_search_line_l();
     if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
         if(Ultrasonic2.cm < 30){
             turn_right();
@@ -117,6 +118,7 @@ void turn_back(int &done, sensor_ultrasonic_t Ultrasonic2){	// Looks if there is
             done++;
         }
     }
+	return check;
 }
 
 void check_for_line(int &done){	// While the robot drives forward for 3 seconds it checks if it has passed the line
@@ -159,6 +161,7 @@ void turn_search_line(int &checkpoint){	// This code slowly turns right while lo
 void move_and_check(sensor_ultrasonic_t Ultrasonic2){	// This is the code wich calls to most other codes and looks for different states
     int done = 0;
     int checkpoint = 0;
+int check = 0
     turn_right();
     while(done < 2){
 		if(done == 0){
@@ -168,11 +171,13 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){	// This is the code wich c
 			check_for_line(done);
 		}
 		if(done != 3){
-			turn_back(done, Ultrasonic2);
+			check = turn_back(done, Ultrasonic2);
 		}
 	}
-    drive_until_line(checkpoint);
-    turn_search_line(checkpoint);
+	if(check != -1){
+    		drive_until_line(checkpoint);
+    		turn_search_line(checkpoint);
+	}
 }
 
 void control_motors(){	// Checks all the sensors and gives the motors power based on the values from the sensors.
