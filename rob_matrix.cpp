@@ -98,27 +98,6 @@ void init_board() {
             board[x][y] = '~';
         }
     }
-
-    switch ( 2 ) {
-    case 0:
-        board[3][0] = 'X';
-        board[2][1] = 'X';
-        board[2][3] = 'X';
-        break;
-    case 1:
-        board[3][0] = 'X';
-        board[2][1] = 'X';
-        board[1][2] = 'X';
-        board[3][3] = 'X';
-        board[3][4] = 'X';
-        break;
-    case 2:
-        board[1][1] = 'X';
-        board[2][2] = 'X';
-        board[3][2] = 'X';
-        board[4][2] = 'X';
-        break;
-    }
 }
 
 bool pos_move_one_step(struct Pos &pos, int direction) {
@@ -151,34 +130,6 @@ bool pos_move_one_step(struct Pos &pos, int direction) {
     return true;
 }
 
-void print_board(struct Pos rob_pos, int direction) {
-    for ( int y = 0; y < board_heigth; y++ ) {
-        for ( int x = 0; x < board_width; x++ ) {
-            if ( x == rob_pos.x && y == rob_pos.y ) {
-                switch ( direction) {
-                case 0: // east
-                    cout << setw(4) << '>';
-                    break;
-                case 1: // south
-                    cout << setw(4) << 'V';
-                    break;
-                case 2: // west
-                    cout << setw(4) << '<';
-                    break;
-                case 3: // north
-                    cout << setw(4) << '^';
-                    break;
-                }
-            }
-            else {
-                cout << setw(4) << board[x][y];
-            }
-        }
-        cout << endl;
-    }
-    cout << endl;
-}
-
 bool run(struct Pos rob_pos, int direction) {
 
     board[rob_pos.x][rob_pos.y] = '*'; // Mark 'been here'
@@ -204,6 +155,14 @@ bool run(struct Pos rob_pos, int direction) {
 }
 
 int main() {
+    signal(SIGINT, exit_signal_handler); // register the exit function for Ctrl+C
+    BP.detect(); // Make sure that the BrickPi3 is communicating and that the firmware is compatible with the drivers.
+
+    BP.set_sensor_type(PORT_3, SENSOR_TYPE_NXT_LIGHT_ON);
+    BP.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
+    BP.set_sensor_type(PORT_1, SENSOR_TYPE_NXT_COLOR_RED);
+  
+    sensor_ultrasonic_t Ultrasonic2;
 
     init_board();
     struct Pos rob_pos = {0, 0};
