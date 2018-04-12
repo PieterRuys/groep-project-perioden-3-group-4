@@ -54,19 +54,15 @@ void forward(int time){
 	sleep(time);
 }
 
-void move_aside(void){
-	turn_right();
-	forward(2);
-	turn_left();
-}
+
 void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 	int done = 0;
 	while(done < 2){
 		if(done == 0){
-			forward(2);
+			forward(3);
 		}
 		else{
-			forward(1);
+			forward(3);
 		}
 		turn_left();
 		if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
