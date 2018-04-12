@@ -170,14 +170,36 @@ int main() {
     BP.set_sensor_type(PORT_1, SENSOR_TYPE_NXT_COLOR_RED);
   
     sensor_ultrasonic_t Ultrasonic2;
+	
+    string regel;
+    cout << "plaats sensor recht boven de lijn (zwart) en voer in a gevolgd door enter" << endl;
+    cin >> regel;
+    BP.get_sensor(PORT_3, mylight);
+    BP.get_sensor(PORT_1, mycolor);
+    MaxLight = mylight.reflected;
+    MinColor = mycolor.reflected_red;
+    cout << "MaxLight =" << MaxLight << endl;
+    cout << "MinColor =" << MinColor << endl;
+    cout << "plaats sensor recht boven de lijn (wit) en voer in a gevolgd door enter" << endl;
+    cin >> regel;
+    BP.get_sensor(PORT_3, mylight);
+    BP.get_sensor(PORT_1, mycolor);
+    MinLight = mylight.reflected;
+    MaxColor = mycolor.reflected_red;
+    cout << "MinLight =" << MinLight << endl;
+    cout << "MaxColor =" << MaxColor << endl;
 
     init_board();
     struct Pos rob_pos = {0, 0};
+	
+    rob_pos.x = rob_pos.y = 0;
+    rob_dir = 0;
 
     for ( int direction = 0; direction < 4 ; direction++ ) {
         if ( run(rob_pos, direction) ) {
             break;
         }
+	robot_turn_right();
     }
 
     return 0;
