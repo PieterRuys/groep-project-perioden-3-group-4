@@ -61,7 +61,7 @@ void get_values(){  // Calculates the reflected values for the colors black and 
   cin >> regel;	
 }
 
-void turn_left(void){
+void turn_left(void){ // This function first stops the robot, the sets te postion in such a way that the robt makes a 90 degrees turn left
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	BP.set_motor_position_relative(PORT_B, -500);
@@ -69,7 +69,7 @@ void turn_left(void){
 	sleep(1);
 }
 
-void turn_right(void){
+void turn_right(void){ // This function first stops the robot, the sets te postion in such a way that the robt makes a 90 degrees turn right
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	BP.set_motor_position_relative(PORT_B, 500);
@@ -77,76 +77,83 @@ void turn_right(void){
 	sleep(1);	
 }
 
-void forward(int time){
+void forward(int time){ // This funtion sets the power to drive forward
 	BP.set_motor_power(PORT_B, 30);
 	BP.set_motor_power(PORT_C, 30);
 	sleep(time);
 }
-bool get_line(){
+bool get_line(){ // Returns true if one of the sensors is on black
 	if(getcolor() == 0 || getlight() == 0){
 		return true;
 	}
 	return false;
 }
 
+void turn_back(int &done, sensor_ultrasonic_t Ultrasonic2){ // Looks if there is an obstacle in the way, if there is it will turn right and drive forward otherwise it wil just drive forward
+    turn_left();
+    if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
+        if(Ultrasonic2.cm < 30){
+            turn_right();
+        }
+        else{
+            done++;
+        }
+    }
+}
 
-void move_and_check(sensor_ultrasonic_t Ultrasonic2){
-	int done = 0;
-	int checkpoint = 0;
-	while(done < 2){
-		if(done == 0){
-			forward(2);
-		}
-		else{
-			forward(0);
-			for(int x = 0; x < 300; x++){
-				if(get_line()){
-					cout << "check3" << endl;
-					done = 3;
-					break;
-				}
-				usleep(10000);
-			}
-		}
-		if(done != 3){
-			turn_left();
-			if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
-				if(Ultrasonic2.cm < 30){
-					turn_right();
-				}
-				else{
-					done++;
-				}
- 			}
-		}
-	}
-	BP.set_motor_power(PORT_B, 30);
-	BP.set_motor_power(PORT_C, 30);
+void check_for_line(int &done){ // While the robot drives forward for 3 seconds it checks if it has passed the line
+    forward(0);
+    for(int x = 0; x < 300; x++){ // Because the sleep time is 10000 microseconds and this loop gets repeated 30 times the overal time is 3 seconds
+        if(get_line()){
+            done = 3;
+            break;
+        }
+        usleep(10000);
+    }
+}
+
+void drive_until_line(int &checkpoint){ // Here the code drives forward until it finds the line
+    forward(0);
 	while(checkpoint == 0){
 		if(getcolor() == 0 || getlight() == 0){
-			cout << "check" << endl;
-			usleep(1000000);
+			usleep(1000000); // If the line is found the robot drives forward until it's body is on the line
 			checkpoint++;
 		}
 	}
-	BP.set_motor_power(PORT_B, 0);
+}
+
+void turn_search_line(int &checkpoint){ // This code slowly turns right while looking for the line
+    BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	while(checkpoint == 1){
-		usleep(100000);
 		if(getcolor() == 0){
-			cout << "check2" << endl;
 			checkpoint++;
 		}
-		else{
+        usleep(100000);
+		if(getcolor() != 0){
 			BP.set_motor_position_relative(PORT_B, 20);
 			BP.set_motor_position_relative(PORT_C, -20);
 		}
 	}
 }
 
-void dodge(sensor_ultrasonic_t Ultrasonic2){
-	turn_right();
-	move_and_check(Ultrasonic2);
+void move_and_check(sensor_ultrasonic_t Ultrasonic2){ // This is the code wich calls to most other codes and looks for different states
+    int done = 0;
+    int checkpoint = 0;
+    turn_right();
+    while(done < 2){
+		if(done == 0){
+			forward(2);
+		}
+		else{
+			check_for_line(done);
+		}
+		if(done != 3){
+			turn_back(done, Ultrasonic2);
+		}
+	}
+    drive_until_line(checkpoint);
+    turn_search_line(checkpoint);
 }
 
 void control_motors(){ // Checks all the sensors and gives the motors power based on the values from the sensors.
@@ -154,7 +161,7 @@ void control_motors(){ // Checks all the sensors and gives the motors power base
     colorval = getcolor();      // Calculates the current percentage of light on the second sensor
     if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
 		    if(Ultrasonic2.cm < 15){
-			    dodge(Ultrasonic2);
+			    move_and_check(Ultrasonic2);
 		    }
  	    }
     // Turning right
