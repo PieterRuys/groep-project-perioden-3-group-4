@@ -130,6 +130,13 @@ bool pos_move_one_step(struct Pos &pos, int direction) {
     return true;
 }
 
+bool detect_obstacle_ahead(struct Pos rob_pos, int direction){
+	if ( pos_move_one_step(rob_pos, direction) ) {
+	//uiteindelijke hier object detecteren
+	if ( rob_pos.x == 3 && rob_pos.y == 0 ) board[rob_pos.x][rob_pos.y] = 'X';//tijdelijke obstacel
+	}
+}
+
 bool run(struct Pos rob_pos, int direction) {
 
     board[rob_pos.x][rob_pos.y] = '*'; // Mark 'been here'
@@ -174,4 +181,12 @@ int main() {
     }
 
     return 0;
+}
+
+ void exit_signal_handler(int signo){
+  if(signo == SIGINT){
+    BP.reset_all();    // Reset everything so there are no run-away motors
+    BP.set_sensor_type(PORT_1, SENSOR_TYPE_NONE);  //Doesn't work, sorry.
+    exit(-2);
+  }
 }
