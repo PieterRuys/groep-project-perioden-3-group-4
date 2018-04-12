@@ -108,7 +108,7 @@ int checkpoint = 1;
 	return 1;
 }
 
-void turn_back(int &done, sensor_ultrasonic_t Ultrasonic2){	// Looks if there is an obstacle in the way, if there is it will turn right and drive forward otherwise it wil just drive forward
+int turn_back(int &done, sensor_ultrasonic_t Ultrasonic2){	// Looks if there is an obstacle in the way, if there is it will turn right and drive forward otherwise it wil just drive forward
     int check = turn_search_line_l();
     if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
         if(Ultrasonic2.cm < 30){
