@@ -69,10 +69,11 @@ void forward_one_step(){
     
     if(lightval == 100){
       //drive until you are on the crossing
-      sleep(1)
+      sleep(1);
       BP.set_motor_power(PORT_B, 0);
       BP.set_motor_power(PORT_C, 0);
       break;
+    }
    
     else{
       BP.set_motor_power(PORT_B, 20);
