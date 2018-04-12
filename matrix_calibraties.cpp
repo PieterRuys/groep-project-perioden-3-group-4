@@ -115,9 +115,10 @@ int main(){
   MaxColor = mycolor.reflected_red;
   cout << "MinLight =" << MinLight << endl;
   cout << "MaxColor =" << MaxColor << endl;
+while(true){
 forward_one_step();
 turn_right();
-forward_one_step();
+}
   
   
   
