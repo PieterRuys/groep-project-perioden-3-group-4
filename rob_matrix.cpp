@@ -29,7 +29,7 @@ struct Pos {
 struct Pos rob_pos;
 int rob_dir;
 
-void turn_left(void){
+void robot_turn_left(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	BP.set_motor_position_relative(PORT_B, -545);
@@ -37,7 +37,7 @@ void turn_left(void){
 	sleep(1);
 }
 
-void turn_right(void){
+void robot_turn_right(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	BP.set_motor_position_relative(PORT_B, 545);
