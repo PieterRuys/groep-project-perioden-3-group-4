@@ -32,7 +32,7 @@ int16_t getcolor(){
   return (100*(val - MinColor))/(MaxColor - MinColor);
 }
 
-void turn_left(void){ // this function first stops the robot, the sets te postion in such a way that the robt makes a 90 degrees turn right
+void turn_left(void){ // This function first stops the robot, the sets te postion in such a way that the robt makes a 90 degrees turn left
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	BP.set_motor_position_relative(PORT_B, -500);
@@ -40,7 +40,7 @@ void turn_left(void){ // this function first stops the robot, the sets te postio
 	sleep(1);
 }
 
-void turn_right(void){ // this function first stops the robot, the sets te postion in such a way that the robt makes a 90 degrees turn right
+void turn_right(void){ // This function first stops the robot, the sets te postion in such a way that the robt makes a 90 degrees turn right
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	BP.set_motor_position_relative(PORT_B, 500);
@@ -108,7 +108,7 @@ void turn_search_line(int &checkpoint){ // This code slowly turns right while lo
 	}
 }
 
-void move_and_check(sensor_ultrasonic_t Ultrasonic2){ // This is the code wich calls to most other codes ands looks for different states
+void move_and_check(sensor_ultrasonic_t Ultrasonic2){ // This is the code wich calls to most other codes and looks for different states
     int done = 0;
     int checkpoint = 0;
     turn_right();
