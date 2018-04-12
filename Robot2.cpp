@@ -121,15 +121,15 @@ int main(){
 			    dodge(Ultrasonic2);
 		    }
  	    }
-    if (lightval <= 70){
+    if (lightval <= 50){
       BP.set_motor_power(PORT_B, (30+(50-lightval)/1.5));
       BP.set_motor_power(PORT_C, (30-(80-lightval)/1.5));
     }
-    else if (colorval <= 70){
+    else if (colorval <= 50){
       BP.set_motor_power(PORT_B, (30-(80-colorval)/1.5));
       BP.set_motor_power(PORT_C, (30+(60-colorval)/1.5));
     }
-    else if(lightval > 40 && colorval > 40){
+    else if(lightval > 50 && colorval > 50){
       BP.set_motor_power(PORT_B, 20);
       BP.set_motor_power(PORT_C, 20);
     }
