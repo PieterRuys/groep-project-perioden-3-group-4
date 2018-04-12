@@ -54,13 +54,11 @@ void robot_turn_left(void){
 }
 
 void robot_turn_right(void){
-	void robot_turn_left(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	BP.set_motor_position_relative(PORT_B, -560);
-	BP.set_motor_position_relative(PORT_C, 560);
+	BP.set_motor_position_relative(PORT_B, 560);
+	BP.set_motor_position_relative(PORT_C, -560);
 	sleep(1);
-	}
 }
 //	BP.set_motor_power(PORT_B, 0);
 //	BP.set_motor_power(PORT_C, 0);
