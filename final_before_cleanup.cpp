@@ -90,7 +90,7 @@ bool get_line(){	// Returns true if one of the sensors is on black
 }
 
 void turn_back(int &done, sensor_ultrasonic_t Ultrasonic2){	// Looks if there is an obstacle in the way, if there is it will turn right and drive forward otherwise it wil just drive forward
-    turn_left();
+    turn_search_line_l();
     if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
         if(Ultrasonic2.cm < 30){
             turn_right();
@@ -136,6 +136,27 @@ void turn_search_line(int &checkpoint){	// This code slowly turns right while lo
 		}
 	}
 }
+
+void turn_search_line_l(){	// This code slowly turns left while looking for the line
+int checkpoint = 1;
+int counter = 0;
+    BP.set_motor_power(PORT_B, 0);
+	BP.set_motor_power(PORT_C, 0);
+	while(checkpoint == 1){
+		if(getlight() == 0){
+			checkpoint++;
+		}
+        usleep(100000);
+		if(getcolor() != 0){
+			BP.set_motor_position_relative(PORT_B, -20);
+			BP.set_motor_position_relative(PORT_C, 20);
+			counter ++;
+		}
+		cout << counter << endl;
+	}
+	cout << counter << endl;
+}
+
 
 void move_and_check(sensor_ultrasonic_t Ultrasonic2){	// This is the code wich calls to most other codes and looks for different states
     int done = 0;
