@@ -15,6 +15,8 @@ uint16_t MaxLight;
 uint16_t MaxColor;
 sensor_light_t mylight;
 sensor_color_t mycolor;
+int16_t lightval;
+int16_t colorval;
 
 // Calculates the percentage of light based on the value received from the first sensor and the min and max values
 int16_t getlight(){
@@ -33,6 +35,57 @@ int16_t getcolor(){
   if (val < MinColor) val = MinColor;
   if (val > MaxColor) val = MaxColor;
   return (100*(val - MinColor))/(MaxColor - MinColor);
+}
+
+void control_motors(){ // Checks all the sensors and gives the motors power based on the values from the sensors.
+    lightval = getlight();	// Calculates the current percentage of light on the first sensor
+    colorval = getcolor();      // Calculates the current percentage of light on the second sensor
+    if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
+		    if(Ultrasonic2.cm < 15){
+			    dodge(Ultrasonic2);
+		    }
+ 	    }
+    // Turning right
+    if (lightval <= 60){	// If the percentage of light from the first sensor is below or equal to 60 the motors get power based on the percentage of light
+      BP.set_motor_power(PORT_B, (30+(60-lightval)/2.0)); // With the left motor getting more power than the right motor
+      BP.set_motor_power(PORT_C, (30-(70-lightval)/1.5));
+    }
+    // Turning left
+    else if (colorval <= 60){	// If the percentage of light from the second sensor is below or equal to 60 the motors get power based on the percentage of light
+      BP.set_motor_power(PORT_B, (30-(70-colorval)/1.5)); // With the right motor getting more power than the left motor
+      BP.set_motor_power(PORT_C, (30+(60-colorval)/2.0));
+    }
+    // Going straight
+    else if(lightval > 60 && colorval > 60){	// If the percentage of light from both of the sensors are above 60 both of the motors get an equal amount of power
+      BP.set_motor_power(PORT_B, 20);
+      BP.set_motor_power(PORT_C, 20);
+    }
+    usleep(100000);
+ }  
+}
+
+void get_values(){  // Calculates the reflected values for the colors black and white
+  // These values get stored in the max and min variables both sensors have one of each
+  // Waits for input between each scan for ease of use
+  string regel;
+  cout << "plaats sensor recht boven de lijn (zwart) en voer in a gevolgd door enter" << endl;
+  cin >> regel;
+  BP.get_sensor(PORT_3, mylight);
+  BP.get_sensor(PORT_1, mycolor);
+  MaxLight = mylight.reflected;
+  MinColor = mycolor.reflected_red;
+  cout << "MaxLight =" << MaxLight << endl;
+  cout << "MinColor =" << MinColor << endl;
+  cout << "Plaats de sensoren recht boven de lijn (wit) en voer in a gevolgd door enter" << endl;
+  cin >> regel;
+  BP.get_sensor(PORT_3, mylight);
+  BP.get_sensor(PORT_1, mycolor);
+  MinLight = mylight.reflected;
+  MaxColor = mycolor.reflected_red;
+  cout << "MinLight =" << MinLight << endl;
+  cout << "MaxColor =" << MaxColor << endl;
+  cout << "Plaats de robot op de lijn en voer in a gevolgd door enter" << endl;
+  cin >> regel;	
 }
 
 void turn_left(void){
@@ -135,61 +188,11 @@ int main(){
   BP.set_sensor_type(PORT_1, SENSOR_TYPE_NXT_COLOR_RED);
   
   sensor_ultrasonic_t Ultrasonic2;
-  
-  // Calculates the reflected values for the colors black and white
-  // These values get stored in the max and min variables both sensors have one of each
-  string regel;
-  cout << "plaats sensor recht boven de lijn (zwart) en voer in a gevolgd door enter" << endl;
-  cin >> regel;
-  BP.get_sensor(PORT_3, mylight);
-  BP.get_sensor(PORT_1, mycolor);
-  MaxLight = mylight.reflected;
-  MinColor = mycolor.reflected_red;
-  cout << "MaxLight =" << MaxLight << endl;
-  cout << "MinColor =" << MinColor << endl;
-  cout << "Plaats de sensoren recht boven de lijn (wit) en voer in a gevolgd door enter" << endl;
-  cin >> regel;
-  BP.get_sensor(PORT_3, mylight);
-  BP.get_sensor(PORT_1, mycolor);
-  MinLight = mylight.reflected;
-  MaxColor = mycolor.reflected_red;
-  cout << "MinLight =" << MinLight << endl;
-  cout << "MaxColor =" << MaxColor << endl;
-  cout << "Plaats de robot op de lijn en voer in a gevolgd door enter" << endl;
-  cin >> regel;
-  
-
-  int16_t lightval;
-  int16_t colorval;
-  
+ 
+  get_values();
+	
   while(true){
-    lightval = getlight();	// Calculates the current percentage of light on the first sensor
-    colorval = getcolor();      // Calculates the current percentage of light on the second sensor
-    cout << lightval << endl;
-    cout << colorval << endl;
-    if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
-		    if(Ultrasonic2.cm < 15){
-			    dodge(Ultrasonic2);
-		    }
- 	    }
-    // Turning right
-    if (lightval <= 60){	// If the percentage of light from the first sensor is below or equal to 60 the motors get power based on the percentage of light
-      BP.set_motor_power(PORT_B, (30+(60-lightval)/2.0)); // With the left motor getting more power than the right motor
-      BP.set_motor_power(PORT_C, (30-(70-lightval)/1.5));
-    }
-    // Turning left
-    else if (colorval <= 60){	// If the percentage of light from the second sensor is below or equal to 60 the motors get power based on the percentage of light
-      BP.set_motor_power(PORT_B, (30-(70-colorval)/1.5)); // With the right motor getting more power than the left motor
-      BP.set_motor_power(PORT_C, (30+(60-colorval)/2.0));
-    }
-    // Going straight
-    else if(lightval > 60 && colorval > 60){	// If the percentage of light from both of the sensors are above 60 both of the motors get an equal amount of power
-      BP.set_motor_power(PORT_B, 20);
-      BP.set_motor_power(PORT_C, 20);
-    }
-    usleep(100000);
- }   
-  
+   	control_motors();
 }
   
   
