@@ -64,6 +64,7 @@ void robot_turn_right(void){
 bool next_crosing_free(sensor_ultrasonic_t Ultrasonic2){
  	if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
 		if(Ultrasonic2.cm < 10){
+			cout << "object" << endl;
 			return true;
 		}
 		else{
