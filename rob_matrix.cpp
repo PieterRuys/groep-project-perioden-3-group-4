@@ -94,7 +94,7 @@ void robot_forward_one_step(){
    else if (colorval <= 60){	// If the percentage of light from the second sensor is below or equal to 60 the motors get power based on the percentage of light
 	BP.set_motor_power(PORT_B, (30-(70-colorval)/1.5)); // With the right motor getting more power than the left motor
 	BP.set_motor_power(PORT_C, (30+(60-colorval)/2.0));
-   
+   }
     else{
       	BP.set_motor_power(PORT_B, 30);
       	BP.set_motor_power(PORT_C, 30);
