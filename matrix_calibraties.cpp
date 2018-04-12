@@ -5,6 +5,8 @@
 
 using namespace std;
 
+void exit_signal_handler(int signo);
+
 uint16_t MinLight;
 uint16_t MinColor;
 uint16_t MaxLight;
