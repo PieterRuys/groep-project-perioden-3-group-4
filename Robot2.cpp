@@ -123,15 +123,15 @@ int main(){
  	    }
     if (lightval <= 60){
       BP.set_motor_power(PORT_B, (30+(50-lightval)/1.5));
-      BP.set_motor_power(PORT_C, (30-(80-lightval)/1.5));
+      BP.set_motor_power(PORT_C, (30-(70-lightval)/1.5));
     }
     else if (colorval <= 60){
-      BP.set_motor_power(PORT_B, (30-(80-colorval)/1.5));
-      BP.set_motor_power(PORT_C, (30+(60-colorval)/1.5));
+      BP.set_motor_power(PORT_B, (30-(70-colorval)/1.5));
+      BP.set_motor_power(PORT_C, (30+(50-colorval)/1.5));
     }
     else if(lightval > 60 && colorval > 60){
-      BP.set_motor_power(PORT_B, 30);
-      BP.set_motor_power(PORT_C, 30);
+      BP.set_motor_power(PORT_B, 20);
+      BP.set_motor_power(PORT_C, 20);
     }
     usleep(100000);
  }   
