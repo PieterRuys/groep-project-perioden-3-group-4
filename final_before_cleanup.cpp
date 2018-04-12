@@ -13,6 +13,7 @@ uint16_t MinLight;
 uint16_t MinColor;
 uint16_t MaxLight;
 uint16_t MaxColor;
+sensor_ultrasonic_t Ultrasonic2;
 sensor_light_t mylight;
 sensor_color_t mycolor;
 int16_t lightval;
@@ -185,8 +186,6 @@ int main(){
   BP.set_sensor_type(PORT_3, SENSOR_TYPE_NXT_LIGHT_ON);
   BP.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
   BP.set_sensor_type(PORT_1, SENSOR_TYPE_NXT_COLOR_RED);
-  
-  sensor_ultrasonic_t Ultrasonic2;
  
   get_values();
 	
