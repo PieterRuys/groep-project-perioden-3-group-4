@@ -68,6 +68,7 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 			forward(2);
 		}
 		else{
+			forward(0);
 			for(int x = 0; x < 30; x++){
 				cout << "check" << endl;
 				if(get_line()){
