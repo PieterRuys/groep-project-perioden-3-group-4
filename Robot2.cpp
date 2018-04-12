@@ -93,7 +93,7 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 	while(checkpoint == 0){
 		if(getcolor() == 0 || getlight() == 100){
 			cout << "check" << endl;
-			sleep(1);
+			usleep(1000000);
 			checkpoint++;
 		}
 	}
