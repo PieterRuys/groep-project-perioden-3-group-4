@@ -17,7 +17,7 @@ sensor_color_t mycolor;
 BrickPi3 BP;
 
 const int board_width = 3;
-const int board_heigth = 2;
+const int board_heigth = 3;
 
 char board[board_width][board_heigth];
 
@@ -152,7 +152,7 @@ bool pos_move_one_step(struct Pos &pos, int direction) {
 bool detect_obstacle_ahead(struct Pos rob_pos, int direction){
 	if ( pos_move_one_step(rob_pos, direction) ) {
 	//put real object detection here
-	if ( rob_pos.x == 1 && rob_pos.y == 1 ) board[rob_pos.x][rob_pos.y] = 'X';//temporary obstacel
+	if ( rob_pos.x == 0 && rob_pos.y == 2 ) board[rob_pos.x][rob_pos.y] = 'X';//temporary obstacel
 	}
 }
 
