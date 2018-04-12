@@ -144,7 +144,7 @@ bool detect_obstacle_ahead(struct Pos rob_pos, int direction, sensor_ultrasonic_
 	}
 }
 
-bool run(struct Pos rob_pos, int direction, Ultrasonic2) {
+bool run(struct Pos rob_pos, int direction, sensor_ultrasonic_t Ultrasonic2) {
 
     board[rob_pos.x][rob_pos.y] = '*'; // Mark 'been here'
 
@@ -153,7 +153,7 @@ bool run(struct Pos rob_pos, int direction, Ultrasonic2) {
         return true;
     }
 
-    detect_obstacle_ahead(rob_pos, direction, sensor_ultrasonic_t Ultrasonic2);
+    detect_obstacle_ahead(rob_pos, direction, Ultrasonic2);
 	
     if ( pos_move_one_step(rob_pos, direction) ) {
 	robot_forward_one_step();
