@@ -29,6 +29,22 @@ struct Pos {
 struct Pos rob_pos;
 int rob_dir;
 
+int16_t getlight(){
+  BP.get_sensor(PORT_3, mylight);
+  int16_t val = mylight.reflected;
+  if (val < MinLight) val = MinLight;
+  if (val > MaxLight) val = MaxLight;
+  return 100-((100*(val - MinLight))/(MaxLight - MinLight));
+}
+
+int16_t getcolor(){
+  BP.get_sensor(PORT_1, mycolor);
+  uint16_t val = mycolor.reflected_red;
+  if (val < MinColor) val = MinColor;
+  if (val > MaxColor) val = MaxColor;
+  return (100*(val - MinColor))/(MaxColor - MinColor);
+}
+
 void robot_turn_left(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
@@ -50,22 +66,6 @@ void robot_turn_right(void){
 			BP.set_motor_position_relative(PORT_C, -20);
 		}
 	}	
-}
-
-int16_t getlight(){
-  BP.get_sensor(PORT_3, mylight);
-  int16_t val = mylight.reflected;
-  if (val < MinLight) val = MinLight;
-  if (val > MaxLight) val = MaxLight;
-  return 100-((100*(val - MinLight))/(MaxLight - MinLight));
-}
-
-int16_t getcolor(){
-  BP.get_sensor(PORT_1, mycolor);
-  uint16_t val = mycolor.reflected_red;
-  if (val < MinColor) val = MinColor;
-  if (val > MaxColor) val = MaxColor;
-  return (100*(val - MinColor))/(MaxColor - MinColor);
 }
 
 bool next_crosing_free(sensor_ultrasonic_t Ultrasonic2){
