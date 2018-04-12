@@ -101,6 +101,7 @@ void init_board() {
 }
 
 bool pos_move_one_step(struct Pos &pos, int direction) {
+// here the new possition gets clculated by checking the previous direction and adding a nummber on the x or y axis acordingly
     struct Pos new_pos = pos;
 
     switch ( direction) {
@@ -142,7 +143,7 @@ bool run(struct Pos rob_pos, int direction) {
     board[rob_pos.x][rob_pos.y] = '*'; // Mark 'been here'
 
     if ( rob_pos.x == board_width - 1 && rob_pos.y == board_heigth - 1 ) {
-        cout << "Hurray!" << endl;
+        cout << "Hurray!" << endl;//the bot has reached its final desstination
         return true;
     }
 
@@ -152,22 +153,29 @@ bool run(struct Pos rob_pos, int direction) {
 	robot_forward_one_step();
         for ( int d = 0; d < 4; d++ ) {
 	    int new_direction = (direction + d) % 4;//molo to make shure the direction is always 0, 1, 2 or 3
-            if ( run(rob_pos, new_direction) ) {
+            if ( run(rob_pos, new_direction) ) {//here the function is made recursive, this is done so the robot can check alloptions in a pace. if there is nowere to go it will go back to the previous space in that space's position.
                 return true;
-            if ( run(rob_pos, d) ) {
-		robot_turn_right();
-                return true;
+	    }
+            if (d != 3) {
+		robot_turn_right();//the last turn is skiped so we can turn back
+                detect_obstacle_ahead(rob_pos, new_direction);
             }
         }
+        robot_turn_left();
+        robot_forward_one_step();
+        robot_turn_left();
+        robot_turn_left();
+        // we have now returnd to our origional possition
     }
 
-    board[rob_pos.x][rob_pos.y] = 'X'; // Give up this space
+    board[rob_pos.x][rob_pos.y] = 'X'; // this space is a dead end, so we mark it of
 
     return false;
 }
 
 int main() {
     signal(SIGINT, exit_signal_handler); // register the exit function for Ctrl+C
+    
     BP.detect(); // Make sure that the BrickPi3 is communicating and that the firmware is compatible with the drivers.
 
     BP.set_sensor_type(PORT_3, SENSOR_TYPE_NXT_LIGHT_ON);
