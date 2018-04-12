@@ -81,15 +81,15 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 		}
 		if(done != 3){
 			turn_left();
+			if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
+				if(Ultrasonic2.cm < 30){
+					turn_right();
+				}
+				else{
+					done++;
+				}
+ 			}
 		}
-		if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
-			if(Ultrasonic2.cm < 30){
-				turn_right();
-			}
-			else{
-				done++;
-			}
- 		}
 	}
 	BP.set_motor_power(PORT_B, 30);
 	BP.set_motor_power(PORT_C, 30);
