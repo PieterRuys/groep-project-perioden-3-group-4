@@ -89,7 +89,7 @@ void robot_forward_one_step(){
       	BP.set_motor_power(PORT_B, 30);
       	BP.set_motor_power(PORT_C, 30);
    }
-    usleep(100000);
+    usleep(10000);
   }
 }
 
