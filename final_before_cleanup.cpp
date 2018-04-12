@@ -135,7 +135,8 @@ int main(){
   
   sensor_ultrasonic_t Ultrasonic2;
   
-  // Calculates the reflectian values for the colors black and white
+  // Calculates the reflected values for the colors black and white
+  // These values get stored in the max and min variables botg sensors have one of each
   string regel;
   cout << "plaats sensor recht boven de lijn (zwart) en voer in a gevolgd door enter" << endl;
   cin >> regel;
