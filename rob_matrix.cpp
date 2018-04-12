@@ -152,7 +152,7 @@ bool pos_move_one_step(struct Pos &pos, int direction) {
 bool detect_obstacle_ahead(struct Pos rob_pos, int direction){
 	if ( pos_move_one_step(rob_pos, direction) ) {
 	//put real object detection here
-	if ( rob_pos.x == 1 && rob_pos.y == 0 ) board[rob_pos.x][rob_pos.y] = 'X';//temporary obstacel
+	if ( rob_pos.x == 1 && rob_pos.y == 1 ) board[rob_pos.x][rob_pos.y] = 'X';//temporary obstacel
 	}
 }
 
