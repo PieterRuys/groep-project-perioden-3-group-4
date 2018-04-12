@@ -91,8 +91,9 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 			break;
 		}
 		else{
-			BP.set_motor_position_relative(PORT_B, 50);
-			BP.set_motor_position_relative(PORT_C, -50);
+			BP.set_motor_position_relative(PORT_B, 20);
+			BP.set_motor_position_relative(PORT_C, -20);
+			usleep(1000000);
 		}
 	}
 }
