@@ -71,7 +71,7 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 			int time = 20;
 		}
 		for(int x = 0; x < time; x++){
-			if(getline){
+			if(getline()){
 				done = 2;
 			}
 			usleep(100000);
@@ -98,7 +98,7 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 	}
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	while(chekpoint == 1){
+	while(checkpoint == 1){
 		usleep(100000);
 		if(getcolor() == 0){
 			cout << "check2" << endl;
