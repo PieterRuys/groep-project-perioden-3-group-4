@@ -151,6 +151,9 @@ bool run(struct Pos rob_pos, int direction) {
     if ( pos_move_one_step(rob_pos, direction) ) {
 	robot_forward_one_step();
         for ( int d = 0; d < 4; d++ ) {
+	    int new_direction = (direction + d) % 4;//molo to make shure the direction is always 0, 1, 2 or 3
+            if ( run(rob_pos, new_direction) ) {
+                return true;
             if ( run(rob_pos, d) ) {
 		robot_turn_right();
                 return true;
