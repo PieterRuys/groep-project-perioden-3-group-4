@@ -63,21 +63,17 @@ bool get_line(){
 
 void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 	int done = 0;
-	int time;
 	while(done < 2){
-		BP.set_motor_power(PORT_B, 30);
-		BP.set_motor_power(PORT_C, 30);
-		if(done == 1){
-			time = 30;
+		if(done == 0){
+			forward(2)
 		}
 		else{
-			time = 20;
-		}
-		for(int x = 0; x < time; x++){
-			if(get_line()){
-				done = 2;
-			}
-			usleep(100000);
+			for(int x = 0; x < 30; x++){
+				cout << "check" << endl;
+				if(get_line()){
+					done++;
+				}
+				usleep(100000);
 		}
 		turn_left();
 		if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
