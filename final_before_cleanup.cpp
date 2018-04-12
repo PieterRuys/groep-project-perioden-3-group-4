@@ -173,8 +173,8 @@ void control_motors(){ // Checks all the sensors and gives the motors power base
       BP.set_motor_power(PORT_C, 20);
     }
     usleep(100000);
- }  
-}
+}  
+
 
 int main(){
   signal(SIGINT, exit_signal_handler); // register the exit function for Ctrl+C
