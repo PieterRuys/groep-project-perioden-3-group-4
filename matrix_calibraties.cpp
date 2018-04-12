@@ -19,16 +19,16 @@ BrickPi3 BP;
 void turn_left(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	BP.set_motor_position_relative(PORT_B, -540);
-	BP.set_motor_position_relative(PORT_C, 540);
+	BP.set_motor_position_relative(PORT_B, -545);
+	BP.set_motor_position_relative(PORT_C, 545);
 	sleep(1);
 }
 
 void turn_right(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	BP.set_motor_position_relative(PORT_B, 540);
-	BP.set_motor_position_relative(PORT_C, -540);
+	BP.set_motor_position_relative(PORT_B, 545);
+	BP.set_motor_position_relative(PORT_C, -545);
 	sleep(1);	
 }
 
