@@ -94,17 +94,17 @@ int checkpoint = 1;
 int counter = 0;
     BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	while(checkpoint == 1){
+	for(int x = 0; x < 27; x++){
 		if(getlight() == 0){
-			checkpoint++;
+			break
 		}
         usleep(100000);
-		if(getcolor() != 0){
-			BP.set_motor_position_relative(PORT_B, -20);
-			BP.set_motor_position_relative(PORT_C, 20);
-			counter ++;
-		}
-		cout << counter << endl;
+	if(getcolor() != 0){
+		BP.set_motor_position_relative(PORT_B, -20);
+		BP.set_motor_position_relative(PORT_C, 20);
+		counter ++;
+	}
+	cout << counter << endl;
 	}
 	cout << counter << endl;
 }
