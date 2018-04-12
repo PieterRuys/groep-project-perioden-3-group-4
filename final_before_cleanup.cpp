@@ -91,7 +91,7 @@ bool get_line(){	// Returns true if one of the sensors is on black
 
 int turn_search_line_l(){	// This code slowly turns left while looking for the line
 int checkpoint = 1;
-int counter = 0;
+
    	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	for(int x = 0; x < 27; x++){
@@ -160,7 +160,6 @@ void turn_search_line(int &checkpoint){	// This code slowly turns right while lo
 
 void move_and_check(sensor_ultrasonic_t Ultrasonic2){	// This is the code wich calls to most other codes and looks for different states
     int done = 0;
-    int checkpoint = 0;
 int check = 0
     turn_right();
     while(done < 2){
@@ -171,10 +170,10 @@ int check = 0
 			check_for_line(done);
 		}
 		if(done != 3){
-			check = turn_back(done, Ultrasonic2);
+			int checkpoint = turn_back(done, Ultrasonic2);
 		}
 	}
-	if(check != -1){
+	if(checkpoint != -1){
     		drive_until_line(checkpoint);
     		turn_search_line(checkpoint);
 	}
