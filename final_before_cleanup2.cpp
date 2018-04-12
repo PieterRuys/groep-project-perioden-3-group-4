@@ -53,14 +53,14 @@ void forward(int time){
 	BP.set_motor_power(PORT_C, 30);
 	sleep(time);
 }
-bool get_line(){ //returns if the one of the sensors is on black
+bool get_line(){ // Returns true if one of the sensors is on black
 	if(getcolor() == 0 || getlight() == 0){
 		return true;
 	}
 	return false;
 }
 
-void turn_back(int &done, sensor_ultrasonic_t Ultrasonic2){//looks if there is an obstacle in the way, if there is it will turn right and drive forward otherwise it wil just drive forward
+void turn_back(int &done, sensor_ultrasonic_t Ultrasonic2){ // Looks if there is an obstacle in the way, if there is it will turn right and drive forward otherwise it wil just drive forward
     turn_left();
     if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
         if(Ultrasonic2.cm < 30){
@@ -72,9 +72,9 @@ void turn_back(int &done, sensor_ultrasonic_t Ultrasonic2){//looks if there is a
     }
 }
 
-void check_for_line(int &done){// while the robot drives forward for 3 seconds it checks is it passes the line
+void check_for_line(int &done){ // While the robot drives forward for 3 seconds it checks if it has passed the line
     forward(0);
-    for(int x = 0; x < 300; x++){//becouse the sleep time is 10000 microseconds and this loop gets repeated 30 times the oveal time is 3 seconds
+    for(int x = 0; x < 300; x++){ // Because the sleep time is 10000 microseconds and this loop gets repeated 30 times the overal time is 3 seconds
         if(get_line()){
             done = 3;
             break;
@@ -93,7 +93,7 @@ void drive_until_line(int &checkpoint){
 	}
 }
 
-void turn_search_line(int &checkpoint){//this code slowly turns while looking for the line
+void turn_search_line(int &checkpoint){ // This code slowly turns right while looking for the line
     BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	while(checkpoint == 1){
@@ -108,7 +108,7 @@ void turn_search_line(int &checkpoint){//this code slowly turns while looking fo
 	}
 }
 
-void move_and_check(sensor_ultrasonic_t Ultrasonic2){//this is the code witch cals to most other coddes ands looks for difrent states
+void move_and_check(sensor_ultrasonic_t Ultrasonic2){ // This is the code wich calls to most other codes ands looks for different states
 	int done = 0;
 	int checkpoint = 0;
     turn_right();
