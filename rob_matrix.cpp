@@ -48,28 +48,35 @@ int16_t getcolor(){
 void robot_turn_left(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	BP.set_motor_position_relative(PORT_B, -545);
-	BP.set_motor_position_relative(PORT_C, 545);
+	BP.set_motor_position_relative(PORT_B, -560);
+	BP.set_motor_position_relative(PORT_C, 560);
 	sleep(1);
 }
 
 void robot_turn_right(void){
+	void robot_turn_left(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	int stop = 0;
+	BP.set_motor_position_relative(PORT_B, -560);
+	BP.set_motor_position_relative(PORT_C, 560);
+	sleep(1);
+}
+//	BP.set_motor_power(PORT_B, 0);
+//	BP.set_motor_power(PORT_C, 0);
+//	int stop = 0;
 //	BP.set_motor_position_relative(PORT_B, -200);
 //	BP.set_motor_position_relative(PORT_C, 200);
-	while(stop < 1){
-		if(getcolor() <= 20){
-			stop++;
-		}
-        usleep(10000);
-		if(getcolor() != 0){
-			BP.set_motor_position_relative(PORT_B, 20);
-			BP.set_motor_position_relative(PORT_C, -20);
-		}
-	}	
-}
+//	while(stop < 1){
+//		if(getcolor() <= 20){
+//			stop++;
+//		}
+  //      usleep(10000);
+	//	if(getcolor() != 0){
+//			BP.set_motor_position_relative(PORT_B, 20);
+//			BP.set_motor_position_relative(PORT_C, -20);
+//		}
+//	}	
+//}
 
 bool next_crosing_free(sensor_ultrasonic_t Ultrasonic2){
  	if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
