@@ -40,9 +40,16 @@ void robot_turn_left(void){
 void robot_turn_right(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	BP.set_motor_position_relative(PORT_B, 545);
-	BP.set_motor_position_relative(PORT_C, -545);
-	sleep(1);	
+	while(true){
+		if(getcolor() == 0){
+			break;
+		}
+        usleep(100000);
+		if(getcolor() != 0){
+			BP.set_motor_position_relative(PORT_B, 20);
+			BP.set_motor_position_relative(PORT_C, -20);
+		}
+	}	
 }
 
 int16_t getlight(){
