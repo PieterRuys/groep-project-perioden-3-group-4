@@ -32,7 +32,7 @@ int16_t getcolor(){
   return (100*(val - MinColor))/(MaxColor - MinColor);
 }
 
-void turn_left(void){
+void turn_left(void){ // this function first stops the robot, the sets te postion in such a way that the robt makes a 90 degrees turn right
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	BP.set_motor_position_relative(PORT_B, -500);
@@ -40,7 +40,7 @@ void turn_left(void){
 	sleep(1);
 }
 
-void turn_right(void){
+void turn_right(void){ // this function first stops the robot, the sets te postion in such a way that the robt makes a 90 degrees turn right
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	BP.set_motor_position_relative(PORT_B, 500);
@@ -48,7 +48,7 @@ void turn_right(void){
 	sleep(1);	
 }
 
-void forward(int time){
+void forward(int time){ // This funtion sets the power to drive forward
 	BP.set_motor_power(PORT_B, 30);
 	BP.set_motor_power(PORT_C, 30);
 	sleep(time);
@@ -83,11 +83,11 @@ void check_for_line(int &done){ // While the robot drives forward for 3 seconds 
     }
 }
 
-void drive_until_line(int &checkpoint){
+void drive_until_line(int &checkpoint){ // Here the code drives forward until it finds the line
     forward(0);
 	while(checkpoint == 0){
 		if(getcolor() == 0 || getlight() == 0){
-			usleep(1000000);
+			usleep(1000000); // If the line is found the robot drives forward until it's body is on the line
 			checkpoint++;
 		}
 	}
@@ -109,10 +109,10 @@ void turn_search_line(int &checkpoint){ // This code slowly turns right while lo
 }
 
 void move_and_check(sensor_ultrasonic_t Ultrasonic2){ // This is the code wich calls to most other codes ands looks for different states
-	int done = 0;
-	int checkpoint = 0;
+    int done = 0;
+    int checkpoint = 0;
     turn_right();
-	while(done < 2){
+    while(done < 2){
 		if(done == 0){
 			forward(2);
 		}
@@ -124,7 +124,7 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){ // This is the code wich c
 		}
 	}
     drive_until_line(checkpoint);
-	turn_search_line(checkpoint);
+    turn_search_line(checkpoint);
 }
 
 int main(){
