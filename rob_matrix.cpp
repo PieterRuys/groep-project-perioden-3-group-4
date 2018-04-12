@@ -132,8 +132,8 @@ bool pos_move_one_step(struct Pos &pos, int direction) {
 
 bool detect_obstacle_ahead(struct Pos rob_pos, int direction){
 	if ( pos_move_one_step(rob_pos, direction) ) {
-	//uiteindelijke hier object detecteren
-	if ( rob_pos.x == 3 && rob_pos.y == 0 ) board[rob_pos.x][rob_pos.y] = 'X';//tijdelijke obstacel
+	//put real object detection here
+	if ( rob_pos.x == 3 && rob_pos.y == 0 ) board[rob_pos.x][rob_pos.y] = 'X';//temporary obstacel
 	}
 }
 
@@ -141,16 +141,18 @@ bool run(struct Pos rob_pos, int direction) {
 
     board[rob_pos.x][rob_pos.y] = '*'; // Mark 'been here'
 
-    print_board(rob_pos, direction);
-
     if ( rob_pos.x == board_width - 1 && rob_pos.y == board_heigth - 1 ) {
         cout << "Hurray!" << endl;
         return true;
     }
 
+    detect_obstacle_ahead(rob_pos, direction);
+	
     if ( pos_move_one_step(rob_pos, direction) ) {
+	robot_forward_one_step();
         for ( int d = 0; d < 4; d++ ) {
             if ( run(rob_pos, d) ) {
+		robot_turn_right();
                 return true;
             }
         }
