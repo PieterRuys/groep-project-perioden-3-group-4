@@ -73,7 +73,7 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 				if(get_line()){
 					cout << "check3" << endl;
 					done++;
-					break
+					break;
 				}
 				usleep(10000);
 			}
