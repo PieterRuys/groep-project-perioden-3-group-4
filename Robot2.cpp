@@ -83,8 +83,8 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 			break;
 		}
 	}
-	BP.set_motor_power(PORT_B, 30);
-	BP.set_motor_power(PORT_C, 30);
+	BP.set_motor_power(PORT_B, 0);
+	BP.set_motor_power(PORT_C, 0);
 	while(true){
 		if(getcolor() == 0){
 			cout << "check2" << endl;
