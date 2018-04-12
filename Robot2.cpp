@@ -54,7 +54,7 @@ void forward(int time){
 	sleep(time);
 }
 bool get_line(){
-	if(getcolor() == 0 || getlight() == 100){
+	if(getcolor() == 0 || getlight() == 0){
 		return true;
 	}
 	return false;
@@ -73,6 +73,7 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 				if(get_line()){
 					cout << "check3" << endl;
 					done++;
+					break
 				}
 				usleep(10000);
 			}
@@ -91,7 +92,7 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 	BP.set_motor_power(PORT_C, 30);
 	int checkpoint = 0;
 	while(checkpoint == 0){
-		if(getcolor() == 0 || getlight() == 100){
+		if(getcolor() == 0 || getlight() == 0){
 			cout << "check" << endl;
 			usleep(1000000);
 			checkpoint++;
