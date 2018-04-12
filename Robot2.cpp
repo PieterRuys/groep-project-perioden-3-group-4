@@ -71,7 +71,7 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 			int time = 20;
 		}
 		for(int x = 0; x < time; x++){
-			if(getline()){
+			if(get_line()){
 				done = 2;
 			}
 			usleep(100000);
