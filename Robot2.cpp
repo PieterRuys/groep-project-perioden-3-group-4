@@ -70,7 +70,7 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 		else{
 			int time = 20;
 		}
-		for(unsignd int x = 0; x < time; x++){
+		for(int x = 0; x < time; x++){
 			if(getline){
 				done = 2;
 			}
