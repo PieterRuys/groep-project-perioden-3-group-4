@@ -136,15 +136,15 @@ bool pos_move_one_step(struct Pos &pos, int direction) {
     return true;
 }
 
-bool detect_obstacle_ahead(struct Pos rob_pos, int direction){
+bool detect_obstacle_ahead(struct Pos rob_pos, int direction, sensor_ultrasonic_t Ultrasonic2){
 	if ( pos_move_one_step(rob_pos, direction) ) {
 		cout << "hoi" << endl;
-	if(!next_crosing_free()) board[rob_pos.x][rob_pos.y] = 'X';
+	if(!next_crosing_free(Ultrasonic2)) board[rob_pos.x][rob_pos.y] = 'X';
 	//if ( rob_pos.x == 2 && rob_pos.y == 0 ) board[rob_pos.x][rob_pos.y] = 'X';//temporary obstacel
 	}
 }
 
-bool run(struct Pos rob_pos, int direction) {
+bool run(struct Pos rob_pos, int direction, Ultrasonic2) {
 
     board[rob_pos.x][rob_pos.y] = '*'; // Mark 'been here'
 
@@ -153,18 +153,18 @@ bool run(struct Pos rob_pos, int direction) {
         return true;
     }
 
-    detect_obstacle_ahead(rob_pos, direction);
+    detect_obstacle_ahead(rob_pos, direction, sensor_ultrasonic_t Ultrasonic2);
 	
     if ( pos_move_one_step(rob_pos, direction) ) {
 	robot_forward_one_step();
         for ( int d = 0; d < 4; d++ ) {
 	    int new_direction = (direction + d) % 4;//molo to make shure the direction is always 0, 1, 2 or 3
-            if ( run(rob_pos, new_direction) ) {//here the function is made recursive, this is done so the robot can check alloptions in a pace. if there is nowere to go it will go back to the previous space in that space's position.
+            if ( run(rob_pos, new_direction, Ultrasonic2) ) {//here the function is made recursive, this is done so the robot can check alloptions in a pace. if there is nowere to go it will go back to the previous space in that space's position.
                 return true;
 	    }
             if (d != 3) {
 		robot_turn_right();//the last turn is skiped so we can turn back
-                detect_obstacle_ahead(rob_pos, new_direction);
+                detect_obstacle_ahead(rob_pos, new_direction, Ultrasonic2);
             }
         }
         robot_turn_left();
@@ -217,7 +217,7 @@ int main() {
     rob_dir = 0;
 
     for ( int direction = 0; direction < 4 ; direction++ ) {
-        if ( run(rob_pos, direction) ) {
+        if ( run(rob_pos, direction, Ultrasonic2) ) {
             break;
         }
 	robot_turn_right();
