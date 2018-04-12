@@ -140,10 +140,10 @@ bool detect_obstacle_ahead(struct Pos rob_pos, int direction, sensor_ultrasonic_
 		cout << "hoi" << endl;
 	BP.set_motor_power(PORT_B, 0);
         BP.set_motor_power(PORT_C, 0);
+	sleep(1);
 	if(next_crosing_free(Ultrasonic2)) board[rob_pos.x][rob_pos.y] = 'X';
 	//if ( rob_pos.x == 2 && rob_pos.y == 0 ) board[rob_pos.x][rob_pos.y] = 'X';//temporary obstacel
 	}
-	sleep(1);
 	BP.set_motor_power(PORT_B, 30);
         BP.set_motor_power(PORT_C, 30);
 }
