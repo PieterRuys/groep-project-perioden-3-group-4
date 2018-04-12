@@ -74,11 +74,11 @@ bool next_crosing_free(sensor_ultrasonic_t Ultrasonic2){
 
 void robot_forward_one_step(){
   while(true){
-
+    int16_t colorval = getcolor();
     int16_t lightval = getlight();
     cout << lightval << endl;
     
-    if(lightval <= 5){
+    if(lightval <= 10 && colorval <= 10){
       //drive until you are on the crossing
       sleep(1);
       BP.set_motor_power(PORT_B, 0);
