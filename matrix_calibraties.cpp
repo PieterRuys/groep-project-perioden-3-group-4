@@ -80,8 +80,8 @@ cout << lightval << endl;
     }
    
     else{
-      BP.set_motor_power(PORT_B, 20);
-      BP.set_motor_power(PORT_C, 20);
+      BP.set_motor_power(PORT_B, 25);
+      BP.set_motor_power(PORT_C, 25);
     }
     usleep(100000);
   }
