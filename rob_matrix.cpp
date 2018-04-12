@@ -72,7 +72,7 @@ bool next_crosing_free(sensor_ultrasonic_t Ultrasonic2){
   	}
 }
 
-void forward_one_step(){
+void robot_forward_one_step(){
   while(true){
 
     int16_t lightval = getlight();
