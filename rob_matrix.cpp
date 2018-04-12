@@ -57,13 +57,13 @@ void robot_turn_right(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	int stop = 0;
-	BP.set_motor_position_relative(PORT_B, -200);
-	BP.set_motor_position_relative(PORT_C, 200);
+//	BP.set_motor_position_relative(PORT_B, -200);
+//	BP.set_motor_position_relative(PORT_C, 200);
 	while(stop < 1){
 		if(getcolor() <= 10){
 			stop++;
 		}
-        usleep(100000);
+        usleep(10000);
 		if(getcolor() != 0){
 			BP.set_motor_position_relative(PORT_B, 20);
 			BP.set_motor_position_relative(PORT_C, -20);
