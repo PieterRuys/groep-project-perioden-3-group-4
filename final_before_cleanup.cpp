@@ -16,7 +16,7 @@ uint16_t MaxColor;
 sensor_light_t mylight;
 sensor_color_t mycolor;
 
-// Calculates the percentage of light from the first sensor
+// Calculates the percentage of light based on the value received from the first sensor and the min and max values
 int16_t getlight(){
   BP.get_sensor(PORT_3, mylight);
   int16_t val = mylight.reflected;
@@ -26,7 +26,7 @@ int16_t getlight(){
 }
 
 
-// Calculates the percentage of light from the second sensor
+// Calculates the percentage of light based on the value received from the second sensor and the min and max values
 int16_t getcolor(){
   BP.get_sensor(PORT_1, mycolor);
   uint16_t val = mycolor.reflected_red;
@@ -128,7 +128,8 @@ int main(){
 
   BP.detect(); // Make sure that the BrickPi3 is communicating and that the firmware is compatible with the drivers.
   
-  // Sets the ports of the brickpi for the use of the different sensors
+  // Sets the ports of the BrickPi3 for the use of the different sensors
+  // The first value represents the port that is being used and the second value represents the type of sensor that is being used
   BP.set_sensor_type(PORT_3, SENSOR_TYPE_NXT_LIGHT_ON);
   BP.set_sensor_type(PORT_2, SENSOR_TYPE_NXT_ULTRASONIC);
   BP.set_sensor_type(PORT_1, SENSOR_TYPE_NXT_COLOR_RED);
@@ -136,7 +137,7 @@ int main(){
   sensor_ultrasonic_t Ultrasonic2;
   
   // Calculates the reflected values for the colors black and white
-  // These values get stored in the max and min variables botg sensors have one of each
+  // These values get stored in the max and min variables both sensors have one of each
   string regel;
   cout << "plaats sensor recht boven de lijn (zwart) en voer in a gevolgd door enter" << endl;
   cin >> regel;
@@ -172,17 +173,17 @@ int main(){
 		    }
  	    }
     // Turning right
-    if (lightval <= 60){	// If the percentage of light from the first sensor is below or equal to 70 the motors get power based on the percentage of light
-      BP.set_motor_power(PORT_B, (30+(60-lightval)/2.0));
+    if (lightval <= 60){	// If the percentage of light from the first sensor is below or equal to 60 the motors get power based on the percentage of light
+      BP.set_motor_power(PORT_B, (30+(60-lightval)/2.0)); // With the left motor getting more power than the right motor
       BP.set_motor_power(PORT_C, (30-(70-lightval)/1.5));
     }
     // Turning left
-    else if (colorval <= 60){	// If the percentage of light from the second sensor is below or equal to 70 the motors get power based on the percentage of light
-      BP.set_motor_power(PORT_B, (30-(70-colorval)/1.5));
+    else if (colorval <= 60){	// If the percentage of light from the second sensor is below or equal to 60 the motors get power based on the percentage of light
+      BP.set_motor_power(PORT_B, (30-(70-colorval)/1.5)); // With the right motor getting more power than the left motor
       BP.set_motor_power(PORT_C, (30+(60-colorval)/2.0));
     }
     // Going straight
-    else if(lightval > 60 && colorval > 60){	// If the percentage of light from both of the sensors are above 40 both of the motors get an equal amount of power
+    else if(lightval > 60 && colorval > 60){	// If the percentage of light from both of the sensors are above 60 both of the motors get an equal amount of power
       BP.set_motor_power(PORT_B, 20);
       BP.set_motor_power(PORT_C, 20);
     }
