@@ -96,7 +96,7 @@ int counter = 0;
 	BP.set_motor_power(PORT_C, 0);
 	for(int x = 0; x < 27; x++){
 		if(getlight() <= 0){
-			break
+			break;
 		}
         	usleep(100000);
 		if(getlight() >= 0){
