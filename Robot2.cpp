@@ -63,14 +63,15 @@ bool get_line(){
 
 void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 	int done = 0;
+	int time;
 	while(done < 2){
 		if(done == 1){
-			int time = 30;
+			time = 30;
 		}
 		else{
-			int time = 20;
+			time = 20;
 		}
-		for(unsigned int x = 0; x < time; x++){
+		for(int x = 0; x < time; x++){
 			if(get_line()){
 				done = 2;
 			}
