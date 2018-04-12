@@ -19,16 +19,16 @@ BrickPi3 BP;
 void turn_left(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	BP.set_motor_position_relative(PORT_B, -500);
-	BP.set_motor_position_relative(PORT_C, 500);
+	BP.set_motor_position_relative(PORT_B, -540);
+	BP.set_motor_position_relative(PORT_C, 540);
 	sleep(1);
 }
 
 void turn_right(void){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	BP.set_motor_position_relative(PORT_B, 550);
-	BP.set_motor_position_relative(PORT_C, -550);
+	BP.set_motor_position_relative(PORT_B, 540);
+	BP.set_motor_position_relative(PORT_C, -540);
 	sleep(1);	
 }
 
@@ -71,7 +71,7 @@ void forward_one_step(){
     int16_t lightval = getlight();
 cout << lightval << endl;
     
-    if(lightval == 0){
+    if(lightval <= 5){
       //drive until you are on the crossing
       sleep(1);
       BP.set_motor_power(PORT_B, 0);
@@ -117,6 +117,7 @@ int main(){
   cout << "MaxColor =" << MaxColor << endl;
 while(true){
 forward_one_step();
+turn_right();
 turn_right();
 }
   
