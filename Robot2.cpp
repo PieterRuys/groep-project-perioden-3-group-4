@@ -86,6 +86,7 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	while(true){
+		usleep(100000);
 		if(getcolor() == 0){
 			cout << "check2" << endl;
 			break;
@@ -93,7 +94,6 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){
 		else{
 			BP.set_motor_position_relative(PORT_B, 20);
 			BP.set_motor_position_relative(PORT_C, -20);
-			usleep(100000);
 		}
 	}
 }
