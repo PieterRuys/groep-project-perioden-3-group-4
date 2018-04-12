@@ -1,7 +1,20 @@
-#include <iostream>
 #include <iomanip>
-
+#include "BrickPi3.h"
+#include <iostream> 
+#include <unistd.h> 
+#include <signal.h> 
 using namespace std;
+
+void exit_signal_handler(int signo);
+
+uint16_t MinLight;
+uint16_t MinColor;
+uint16_t MaxLight;
+uint16_t MaxColor;
+sensor_light_t mylight;
+sensor_color_t mycolor;
+
+BrickPi3 BP;
 
 const int board_width = 5;
 const int board_heigth = 5;
@@ -12,6 +25,71 @@ struct Pos {
     int x;
     int y;
 };
+
+void turn_left(void){
+	BP.set_motor_power(PORT_B, 0);
+	BP.set_motor_power(PORT_C, 0);
+	BP.set_motor_position_relative(PORT_B, -545);
+	BP.set_motor_position_relative(PORT_C, 545);
+	sleep(1);
+}
+
+void turn_right(void){
+	BP.set_motor_power(PORT_B, 0);
+	BP.set_motor_power(PORT_C, 0);
+	BP.set_motor_position_relative(PORT_B, 545);
+	BP.set_motor_position_relative(PORT_C, -545);
+	sleep(1);	
+}
+
+int16_t getlight(){
+  BP.get_sensor(PORT_3, mylight);
+  int16_t val = mylight.reflected;
+  if (val < MinLight) val = MinLight;
+  if (val > MaxLight) val = MaxLight;
+  return 100-((100*(val - MinLight))/(MaxLight - MinLight));
+}
+
+int16_t getcolor(){
+  BP.get_sensor(PORT_1, mycolor);
+  uint16_t val = mycolor.reflected_red;
+  if (val < MinColor) val = MinColor;
+  if (val > MaxColor) val = MaxColor;
+  return (100*(val - MinColor))/(MaxColor - MinColor);
+}
+
+bool next_crosing_free(sensor_ultrasonic_t Ultrasonic2){
+ 	if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
+		if(Ultrasonic2.cm < 10){
+			return true;
+		}
+		else{
+			return false;
+		}
+  	}
+}
+
+void forward_one_step(){
+  while(true){
+
+    int16_t lightval = getlight();
+    cout << lightval << endl;
+    
+    if(lightval <= 5){
+      //drive until you are on the crossing
+      sleep(1);
+      BP.set_motor_power(PORT_B, 0);
+      BP.set_motor_power(PORT_C, 0);
+      break;
+    }
+   
+    else{
+      BP.set_motor_power(PORT_B, 30);
+      BP.set_motor_power(PORT_C, 30);
+    }
+    usleep(100000);
+  }
+}
 
 void init_board() {
 
