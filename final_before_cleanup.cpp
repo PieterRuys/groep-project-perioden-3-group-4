@@ -156,12 +156,12 @@ void turn_search_line(int &checkpoint){	// This code slowly turns right while lo
 		if(getcolor() > 10){
 			BP.set_motor_position_relative(PORT_B, 20);
 			BP.set_motor_position_relative(PORT_C, -20);
+		}
 		else if(getcolor() <= 10){
 			checkpoint++;
 		}
 		usleep(100000);
 
-		}
 	}
 }
 
