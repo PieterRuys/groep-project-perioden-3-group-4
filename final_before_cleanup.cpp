@@ -141,8 +141,9 @@ void check_for_line(int &done){	// While the robot drives forward for 3 seconds 
 void drive_until_line(int &checkpoint){	// Here the code drives forward until it finds the line
     forward(0);
 	while(checkpoint == 0){
-		if(getcolor() == 10 || getlight() == 10){
-			usleep(100000);	// If the line is found the robot drives forward until it's body is on the line
+		if(getcolor() <= 10 || getlight() <= 10){
+			cout << "checkpoint" << endl;
+			usleep(1000000);	// If the line is found the robot drives forward until it's body is on the line
 			checkpoint++;
 		}
 		usleep(10000);
