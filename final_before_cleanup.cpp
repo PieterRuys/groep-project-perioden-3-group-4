@@ -90,8 +90,7 @@ bool get_line(){	// Returns true if one of the sensors is on black
 }
 
 int turn_search_line_l(){	// This code slowly turns left while looking for the line
-int checkpoint = 1;
-
+    int checkpoint = 1;
    	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	for(int x = 0; x < 30; x++){
@@ -111,11 +110,11 @@ int checkpoint = 1;
 int turn_back(int &done, sensor_ultrasonic_t Ultrasonic2, int turn){	// Looks if there is an obstacle in the way, if there is it will turn right and drive forward otherwise it wil just drive forward
     int check = 0;
 	if(turn == 1){
-	check = turn_search_line_l();
+        check = turn_search_line_l();
     }
-else{
-	turn_left(); 	
-}
+    else{
+        turn_left(); 	
+    }
     if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
         if(Ultrasonic2.cm < 30){
             turn_right();
