@@ -94,7 +94,7 @@ int checkpoint = 1;
 
    	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	for(int x = 0; x < 27; x++){
+	for(int x = 0; x < 30; x++){
 		if(getlight() <= 0){
 			return -1;
 		}
@@ -108,8 +108,13 @@ int checkpoint = 1;
 	return 1;
 }
 
-int turn_back(int &done, sensor_ultrasonic_t Ultrasonic2){	// Looks if there is an obstacle in the way, if there is it will turn right and drive forward otherwise it wil just drive forward
-    int check = turn_search_line_l();
+int turn_back(int &done, sensor_ultrasonic_t Ultrasonic2, int turn){	// Looks if there is an obstacle in the way, if there is it will turn right and drive forward otherwise it wil just drive forward
+    if(turn = 1){
+	int check = turn_search_line_l();
+    }
+else{
+	turn_left(); 	
+}
     if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
         if(Ultrasonic2.cm < 30){
             turn_right();
@@ -136,7 +141,7 @@ void drive_until_line(int &checkpoint){	// Here the code drives forward until it
     forward(0);
 	while(checkpoint == 0){
 		if(getcolor() == 0 || getlight() == 0){
-			usleep(1000000);	// If the line is found the robot drives forward until it's body is on the line
+			usleep(500000);	// If the line is found the robot drives forward until it's body is on the line
 			checkpoint++;
 		}
 		usleep(10000);
@@ -163,6 +168,7 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){	// This is the code wich c
     int done = 0;
 	int check = 0;
 	int checkpoint = 0;
+	int turn = 0;
     turn_right();
     while(done < 2){
 		if(done == 0){
@@ -172,7 +178,8 @@ void move_and_check(sensor_ultrasonic_t Ultrasonic2){	// This is the code wich c
 			check_for_line(done);
 		}
 		if(done != 3){
-			check = turn_back(done, Ultrasonic2);
+			check = turn_back(done, Ultrasonic2, turn);
+			turn++;
 		}
 	}
 	if(check != -1){
