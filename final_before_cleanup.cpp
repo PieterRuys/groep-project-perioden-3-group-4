@@ -110,7 +110,7 @@ int checkpoint = 1;
 
 int turn_back(int &done, sensor_ultrasonic_t Ultrasonic2, int turn){	// Looks if there is an obstacle in the way, if there is it will turn right and drive forward otherwise it wil just drive forward
     int check = 0;
-	if(turn = 1){
+	if(turn == 1){
 	check = turn_search_line_l();
     }
 else{
