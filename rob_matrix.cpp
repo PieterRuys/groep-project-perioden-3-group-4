@@ -29,7 +29,7 @@ struct Pos {
 struct Pos rob_pos;
 int rob_dir;
 
-int16_t getlight(){
+int16_t getlight(){ // An code for finding the percentage of light coming in
   BP.get_sensor(PORT_3, mylight);
   int16_t val = mylight.reflected;
   if (val < MinLight) val = MinLight;
@@ -37,7 +37,7 @@ int16_t getlight(){
   return 100-((100*(val - MinLight))/(MaxLight - MinLight));
 }
 
-int16_t getcolor(){
+int16_t getcolor(){ // An code for finding the percentage of light coming in measured in red
   BP.get_sensor(PORT_1, mycolor);
   uint16_t val = mycolor.reflected_red;
   if (val < MinColor) val = MinColor;
@@ -45,7 +45,7 @@ int16_t getcolor(){
   return (100*(val - MinColor))/(MaxColor - MinColor);
 }
 
-void robot_turn_left(void){
+void robot_turn_left(void){ // An code to turn left
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	BP.set_motor_position_relative(PORT_B, -560);
@@ -53,7 +53,7 @@ void robot_turn_left(void){
 	sleep(1);
 }
 
-void robot_turn_right(void){
+void robot_turn_right(void){ // An code to turn right
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
 	BP.set_motor_position_relative(PORT_B, 560);
@@ -61,10 +61,9 @@ void robot_turn_right(void){
 	sleep(1);
 }
 
-bool next_crosing_free(sensor_ultrasonic_t Ultrasonic2){
+bool next_crosing_free(sensor_ultrasonic_t Ultrasonic2){ // An code to detect if there is an object in the way
  	if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
 		if(Ultrasonic2.cm < 20){
-			cout << "object" << endl;
 			return true;
 		}
 		else{
@@ -73,11 +72,10 @@ bool next_crosing_free(sensor_ultrasonic_t Ultrasonic2){
   	}
 }
 
-void robot_forward_one_step(){
+void robot_forward_one_step(){ // Here the robot drives forward until it spots a black marking with both sensors
   while(true){
     int16_t colorval = getcolor();
     int16_t lightval = getlight();
-    //cout << lightval << endl;
     
     if(lightval <= 20 && colorval <= 20){
       //drive until you are on the crossing
@@ -94,7 +92,7 @@ void robot_forward_one_step(){
   }
 }
 
-void init_board() {
+void init_board() { // Here the board on wich the robot will rive gets made
 
     for ( int x = 0; x < board_width; x++ ) {
         for ( int y = 0; y < board_heigth; y++ ) {
@@ -104,7 +102,7 @@ void init_board() {
 }
 
 bool pos_move_one_step(struct Pos &pos, int direction) {
-// here the new possition gets clculated by checking the previous direction and adding a nummber on the x or y axis acordingly
+// here the new possition gets calculated by checking the previous direction and adding a nummber on the x or y axis acordingly
     struct Pos new_pos = pos;
 
     switch ( direction) {
@@ -134,20 +132,18 @@ bool pos_move_one_step(struct Pos &pos, int direction) {
     return true;
 }
 
-bool detect_obstacle_ahead(struct Pos rob_pos, int direction, sensor_ultrasonic_t Ultrasonic2){
+bool detect_obstacle_ahead(struct Pos rob_pos, int direction, sensor_ultrasonic_t Ultrasonic2){ // Here it checks if there is an obstacle and palces an X if there is
 	if ( pos_move_one_step(rob_pos, direction) ) {
-		cout << "hoi" << endl;
-	BP.set_motor_power(PORT_B, 0);
-        BP.set_motor_power(PORT_C, 0);
-	sleep(1);
-	if(next_crosing_free(Ultrasonic2)) board[rob_pos.x][rob_pos.y] = 'X';
-	//if ( rob_pos.x == 2 && rob_pos.y == 0 ) board[rob_pos.x][rob_pos.y] = 'X';//temporary obstacel
+		BP.set_motor_power(PORT_B, 0);
+        	BP.set_motor_power(PORT_C, 0);
+		sleep(1);
+		if(next_crosing_free(Ultrasonic2)) board[rob_pos.x][rob_pos.y] = 'X';
 	}
 	BP.set_motor_power(PORT_B, 30);
         BP.set_motor_power(PORT_C, 30);
 }
 
-bool run(struct Pos rob_pos, int direction, sensor_ultrasonic_t Ultrasonic2) {
+bool run(struct Pos rob_pos, int direction, sensor_ultrasonic_t Ultrasonic2) { // This is the recursive code that walks the board
 
     board[rob_pos.x][rob_pos.y] = '*'; // Mark 'been here'
 
