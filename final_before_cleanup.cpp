@@ -83,7 +83,7 @@ void forward(int time){	// This funtion sets the power to drive forward
 	sleep(time);
 }
 bool get_line(){	// Returns true if one of the sensors is on black
-	if(getcolor() == 0 || getlight() == 0){
+	if(getcolor() <= 10 || getlight() <= 10){
 		return true;
 	}
 	return false;
