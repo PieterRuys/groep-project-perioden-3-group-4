@@ -139,7 +139,7 @@ void drive_until_line(int &checkpoint){	// Here the code drives forward until it
 			usleep(100000);	// If the line is found the robot drives forward until it's body is on the line
 			checkpoint++;
 		}
-		usleep(10000
+		usleep(10000);
 	}
 }
 
