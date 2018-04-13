@@ -113,6 +113,7 @@ int turn_back(int &done, sensor_ultrasonic_t Ultrasonic2, int turn){	// Looks if
 	int check = turn_search_line_l();
     }
 else{
+	int check = 1;
 	turn_left(); 	
 }
     if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
