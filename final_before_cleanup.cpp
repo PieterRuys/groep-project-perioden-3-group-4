@@ -64,8 +64,8 @@ void get_values(){	// Calculates the reflected values for the colors black and w
 void turn_left(void){	// This function first stops the robot, the sets te postion in such a way that the robt makes a 90 degrees turn left
 	BP.set_motor_power(PORT_B, 0);
 	BP.set_motor_power(PORT_C, 0);
-	BP.set_motor_position_relative(PORT_B, -500);
-	BP.set_motor_position_relative(PORT_C, 500);
+	BP.set_motor_position_relative(PORT_B, -550);
+	BP.set_motor_position_relative(PORT_C, 550);
 	sleep(1);
 }
 
