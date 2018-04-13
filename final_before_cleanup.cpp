@@ -114,7 +114,6 @@ int turn_back(int &done, sensor_ultrasonic_t Ultrasonic2, int turn){	// Looks if
 	check = turn_search_line_l();
     }
 else{
-	check = 1;
 	turn_left(); 	
 }
     if(BP.get_sensor(PORT_2, Ultrasonic2) == 0){
@@ -143,7 +142,7 @@ void drive_until_line(int &checkpoint){	// Here the code drives forward until it
     forward(0);
 	while(checkpoint == 0){
 		if(getcolor() == 0 || getlight() == 0){
-			usleep(500000);	// If the line is found the robot drives forward until it's body is on the line
+			usleep(100000);	// If the line is found the robot drives forward until it's body is on the line
 			checkpoint++;
 		}
 		usleep(10000);
@@ -157,7 +156,7 @@ void turn_search_line(int &checkpoint){	// This code slowly turns right while lo
 		if(getcolor() <= 10){
 			checkpoint++;
 		}
-        usleep(10000);
+        usleep(100000);
 		if(getcolor() > 10){
 			BP.set_motor_position_relative(PORT_B, 20);
 			BP.set_motor_position_relative(PORT_C, -20);
