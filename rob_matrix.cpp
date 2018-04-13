@@ -16,8 +16,8 @@ sensor_color_t mycolor;
 
 BrickPi3 BP;
 
-const int board_width = 4;
-const int board_heigth = 4;
+const int board_width = 3;
+const int board_heigth = 2;
 
 char board[board_width][board_heigth];
 
