@@ -137,7 +137,7 @@ void drive_until_line(int &checkpoint){	// Here the code drives forward until it
 	cout << "hoi" << endl;
 	while(checkpoint == 0){
 		if(getcolor() == 0 || getlight() == 0){
-			usleep(1000000);	// If the line is found the robot drives forward until it's body is on the line
+			usleep(10000);	// If the line is found the robot drives forward until it's body is on the line
 			checkpoint++;
 		}
 	}
@@ -150,7 +150,7 @@ void turn_search_line(int &checkpoint){	// This code slowly turns right while lo
 		if(getcolor() <= 10){
 			checkpoint++;
 		}
-        usleep(100000);
+        usleep(10000);
 		if(getcolor() > 10){
 			BP.set_motor_position_relative(PORT_B, 20);
 			BP.set_motor_position_relative(PORT_C, -20);
