@@ -136,7 +136,7 @@ void drive_until_line(int &checkpoint){	// Here the code drives forward until it
     forward(0);
 	while(checkpoint == 0){
 		if(getcolor() == 0 || getlight() == 0){
-			usleep(100000);	// If the line is found the robot drives forward until it's body is on the line
+			usleep(1000000);	// If the line is found the robot drives forward until it's body is on the line
 			checkpoint++;
 		}
 		usleep(10000);
